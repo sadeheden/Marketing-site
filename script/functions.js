@@ -18,11 +18,19 @@ export function login(event) {
     }
     else {
         //במידה והמשתמש נמצא - נרצה לשמור בלוקאל סטורג
+        console.log(JSON.stringify(loginUser));
         localStorage.setItem('user', JSON.stringify(loginUser));
         //עבור לדף פרופיל
         document.location.href = '/main.html';
     }
 
+}
+
+export function logout(event) {
+    //ביטול רענון הדף
+    event.preventDefault();
+    localStorage.removeItem('user');
+    document.location.href = '/index.html';
 }
 
 export function showUserName(){
