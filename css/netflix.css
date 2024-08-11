@@ -1,0 +1,89 @@
+/* General styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+background-color: rgb(163, 190, 214);
+    color: white;
+    width: fit-content;
+}
+
+.header {
+    display: -webkit-inline-box;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #535252;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo img {
+    width: 100px;
+}
+
+.nav a {
+    color: white;
+    margin-left: 50px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    position: relative;
+    height: 500px;
+    background-image:url(/photos/adam2.png);
+    background-size: cover;
+    background-position: center;
+
+}
+
+.hero-text {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.play-btn,
+.info-btn {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.play-btn:hover,
+.info-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.movie-section {
+    padding: 80px 50px 20px 50px;
+}
+
+.movie-section h2 {
+    margin-bottom: 20px;
+}
+
+.movie-row {
+    display: flex;
+    gap: 10px;
+}
+
+.movie-row img {
+    width: 200px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.movie-row img:hover {
+    transform: scale(1.1);
+}

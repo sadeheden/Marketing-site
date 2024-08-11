@@ -36,3 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+function changeLogo(logoSrc) {
+    document.getElementById('logo').src = logoSrc;
+}
