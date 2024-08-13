@@ -1,3 +1,4 @@
+/* General reset and body styling */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -8,6 +9,7 @@ body {
     min-height: 100vh;
 }
 
+/* Header styling */
 header {
     display: flex;
     align-items: center;
@@ -23,29 +25,11 @@ header {
     font-weight: bold;
 }
 
+/* Navigation styling */
 nav {
-    display: contents;
-    flex: 1;
+    display: flex;
     justify-content: center;
     margin: 0 20px;
-    
-}
-/* Add this to your CSS file */
-input[type="submit"] {
-    background-color: #6A5ACD; /* Purple color */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #5B4B8A; /* Darker purple on hover */
 }
 
 nav a {
@@ -65,6 +49,25 @@ nav a:hover {
     align-items: center;
 }
 
+/* Input button styling */
+input[type="submit"] {
+    background-color: #6A5ACD; /* Purple color */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #5B4B8A; /* Darker purple on hover */
+}
+
+/* Profile and icons styling */
 .icons {
     display: flex;
     margin-right: 20px;
@@ -73,21 +76,6 @@ nav a:hover {
 .icon {
     margin: 0 5px;
     font-size: 1.2em;
-}
-
-.create-button {
-    background-color: #6A5ACD;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.create-button:hover {
-    background-color: #5B4B8A;
 }
 
 .profile {
@@ -104,6 +92,7 @@ nav a:hover {
     font-size: 1.2em;
 }
 
+/* Footer styling */
 footer {
     background-color: #fff;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
@@ -140,186 +129,68 @@ footer {
     color: #666;
 }
 
-.login-container {
-    background-color: #fff;
-    padding: 60px;
-    padding-bottom: 60px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+/* Editor and preview layout */
+.container {
+    display: flex;
+    flex-grow: 1;
+    gap: 20px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.editor {
     width: 300px;
-    text-align: center;
-    margin: 40px auto;
-}
-
-h1 {
-    margin-bottom: 20px;
-    font-size: 2em;
-    color: #333;
-}
-
-p {
-    margin-bottom: 10px;
-    color: #666;
-}
-
-.signUp {
-    background-color: #4285F4;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 20px;
-    font-size: 1em;
-}
-
-
-
-.or {
-    margin: 20px 0;
-    color: #aaa;
-    font-size: 0.9em;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    text-align: left;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-}
-
-input {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-.form-footer {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.forgot-password {
-    color: #6A5ACD;
-    text-decoration: none;
-}
-
-.forgot-password:hover {
-    text-decoration: underline;
-}
-
-.login-button {
-    background-color: #6A5ACD;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1em;
-}
-
-.login-button:hover {
-    background-color: #5B4B8A;
-}
-
-.register {
-    margin-top: 20px;
-    color: #666;
-}
-
-.register a {
-    color: #6A5ACD;
-    text-decoration: none;
-}
-
-.register a:hover {
-    text-decoration: underline;
-}
-
-/* Popup box styles */
-.popup-box {
-    position: absolute;
-    display: none;
-    background: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    padding: 20px;
+    background-color: #fff;
     border-radius: 8px;
-    width: 180px;
-    z-index: 1000;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.popup-box:before {
-    content: '';
-    position: fixed;
-    top: 50%;
-    left: -10px;
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent #fff transparent transparent;
-}
-
-.popup-box.visible {
-    display: block;
-}
-
-.popup-box-content {
-    font-size: 14px;
-    color: #333;
-}
-.error-message {
-    color: red;
-    margin-top: 10px;
-    display: none;
-}
-.menu-container {
-    flex: 1;
+.preview {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    margin-bottom: 100px;
-    font-size: 2em;
-    color: #333;
+/* Banner styling */
+#banner {
+    text-align: center;
+    line-height: 100px;
+    color: white;
+    font-size: 24px;
+    margin-top: 20px;
+    background-color: #6A5ACD; /* Default background color */
+    border-radius: 8px;
 }
 
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+.banner.small {
+    width: 300px;
+    height: 100px;
 }
 
-.menu-button {
-    background-color: #6A5ACD;
-    color: #fff;
+.banner.large {
+    width: 600px;
+    height: 200px;
+}
+
+/* Button styling */
+button {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
     border: none;
-    padding: 20px 40px;
-    border-radius: 30px;
-    font-weight: bold;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-size: 1.2em;
-    width: 200px;
-    height: 150px;
-    margin-bottom: 120px;
 }
 
-.menu-button:hover {
-    background-color: #524e6e;
-    transform: scale(1.05);
+button:hover {
+    background-color: #0056b3;
 }

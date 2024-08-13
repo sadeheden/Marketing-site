@@ -2,69 +2,91 @@ import { global } from "./vars.js";
 import { User } from "../model/user.model.js";
 
 export function login(event) {
-    //ביטול רענון הדף
     event.preventDefault();
-
-    //שליפת הנתונים מתוך הטופס
     let email = document.querySelector("#email").value;
     let password = document.querySelector("#password").value;
 
-    //מציאת האובייקט המתאים מתוך המאגר
     let loginUser = global.users.find((user) => user.email == email && user.password == password);
 
-    //בדיקה האם בכלל נמצא משתמש כזה
     if (!loginUser) {
         alert("Invalid Login info");
-    }
-    else {
-        //במידה והמשתמש נמצא - נרצה לשמור בלוקאל סטורג
-        console.log(JSON.stringify(loginUser));
+    } else {
         localStorage.setItem('user', JSON.stringify(loginUser));
-        //עבור לדף פרופיל
         document.location.href = '/main.html';
     }
-
 }
 
 export function logout(event) {
-    //ביטול רענון הדף
     event.preventDefault();
     localStorage.removeItem('user');
     document.location.href = '/index.html';
 }
 
-export function showUserName(){
-    //localStorage.getItem('user') - תמיד יהיה מחרוזת
-    //ניגשים ללוקאל סטורג כדי לשלוף את נתוני המשתמש שהתחבר
-    //ממירים את המחרוזת לאובייקט
+export function showUserName() {
     let loginUser = JSON.parse(localStorage.getItem('user'));
 
-    //אם ניגשנו ישירות לדף בלי להתחבר
-    if(!loginUser){
-        location.href= "/";
+    if (!loginUser) {
+        location.href = "/";
     }
 
     document.querySelector('#username').textContent = loginUser.username;
 }
 
-// export function isValid(email, password) {
-//     return global.users.some(user => user.email === email && user.password === password);
-// }
-
 export function createNewUser(event) {
-        //ביטול רענון הדף
-        event.preventDefault();
+    event.preventDefault();
+    let email = document.querySelector("#email").value;
+    let password = document.querySelector("#password").value;
+    let username = document.querySelector("#name").value;
 
-        //שליפת הנתונים מתוך הטופס
-        let email = document.querySelector("#email").value;
-        let password = document.querySelector("#password").value;
-        let username = document.querySelector("#name").value;
+    const newUser = new User(email, password, username);
+    global.users.push(newUser);
+    return newUser;
+}
+export function saveBanner() {
+    const size = document.getElementById('size').value;
+    const color = document.getElementById('color').value;
+    const text = document.getElementById('text').value;
 
-    // if (!User.isValid(email, password)) {
-        const newUser = new User(email, password, username);
-        global.users.push(newUser);
-        return newUser;
-    // } else {
-    //     return null; // User already exists
-    // }
+    const bannerData = {
+        size: size,
+        color: color,
+        text: text
+    };
+
+    localStorage.setItem('banner', JSON.stringify(bannerData));
+    displayBanner(); // Update the preview immediately after saving
+}
+
+export function displayBanner() {
+    const banner = document.getElementById('banner');
+    const bannerData = JSON.parse(localStorage.getItem('banner'));
+
+    if (bannerData) {
+        banner.className = `banner ${bannerData.size}`;
+        banner.style.backgroundColor = bannerData.color;
+        banner.textContent = bannerData.text;
+    } else {
+        banner.className = 'banner small';
+        banner.style.backgroundColor = '#ffffff';
+        banner.textContent = 'Your Banner Preview';
+    }
+}
+
+export function managePopup() {
+    const createButton = document.querySelector('.create-button');
+    const popupBox = document.getElementById('popupBox');
+
+    createButton.addEventListener('click', function() {
+        popupBox.classList.toggle('visible');
+        
+        const rect = createButton.getBoundingClientRect();
+        popupBox.style.top = `${rect.bottom + window.scrollY}px`;
+        popupBox.style.left = `${rect.left}px`;
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!popupBox.contains(event.target) && !createButton.contains(event.target)) {
+            popupBox.classList.remove('visible');
+        }
+    });
 }
