@@ -3,10 +3,11 @@ import { User } from "../model/user.model.js";
 
 export function login(event) {
     event.preventDefault();
-    let email = document.querySelector("#email").value;
-    let password = document.querySelector("#password").value;
+    alert(JSON.stringify(global.users));
+    const email = document.querySelector("#email").value.trim();
+    const password = document.querySelector("#password").value.trim();
 
-    let loginUser = global.users.find((user) => user.email == email && user.password == password);
+    const loginUser = global.users.find((user) => user.email === email && user.password === password);
 
     if (!loginUser) {
         alert("Invalid Login info");
@@ -23,38 +24,46 @@ export function logout(event) {
 }
 
 export function showUserName() {
-    let loginUser = JSON.parse(localStorage.getItem('user'));
+    const loginUser = JSON.parse(localStorage.getItem('user'));
 
     if (!loginUser) {
         location.href = "/";
+        return;
     }
 
-    document.querySelector('#username').textContent = loginUser.username;
+    document.querySelector('#username').textContent = loginUser.username || 'Guest';
 }
 
-export function createNewUser(event) {
-    event.preventDefault();
-    let email = document.querySelector("#email").value;
-    let password = document.querySelector("#password").value;
-    let username = document.querySelector("#name").value;
+// export function createNewUser(event) {
+//     event.preventDefault();
 
-    const newUser = new User(email, password, username);
-    global.users.push(newUser);
-    return newUser;
-}
+//     const email = document.querySelector("#email").value.trim();
+//     const password = document.querySelector("#password").value.trim();
+//     const username = document.querySelector("#name").value.trim();
+
+//     const userExists = global.users.some(user => user.email === email);
+    
+//     if (userExists) {
+//         alert('User already exists');
+//         return null;
+//     }
+
+//     const newUser = new User(email, password, username);
+//     global.users.push(newUser);
+//     localStorage.setItem('user', JSON.stringify(newUser));
+
+//     return newUser;
+// }
+
 export function saveBanner() {
     const size = document.getElementById('size').value;
     const color = document.getElementById('color').value;
-    const text = document.getElementById('text').value;
+    const text = document.getElementById('text').value.trim();
 
-    const bannerData = {
-        size: size,
-        color: color,
-        text: text
-    };
-
+    const bannerData = { size, color, text };
     localStorage.setItem('banner', JSON.stringify(bannerData));
-    displayBanner(); // Update the preview immediately after saving
+
+    displayBanner();
 }
 
 export function displayBanner() {
@@ -65,28 +74,40 @@ export function displayBanner() {
         banner.className = `banner ${bannerData.size}`;
         banner.style.backgroundColor = bannerData.color;
         banner.textContent = bannerData.text;
-    } else {
-        banner.className = 'banner small';
-        banner.style.backgroundColor = '#ffffff';
-        banner.textContent = 'Your Banner Preview';
     }
 }
+export function createNewUser(event) {
+    // Prevent page refresh on form submission
+    event.preventDefault();
 
-export function managePopup() {
-    const createButton = document.querySelector('.create-button');
-    const popupBox = document.getElementById('popupBox');
+    // Get form values
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#password").value;
+    const username = document.querySelector("#name").value;
 
-    createButton.addEventListener('click', function() {
-        popupBox.classList.toggle('visible');
-        
-        const rect = createButton.getBoundingClientRect();
-        popupBox.style.top = `${rect.bottom + window.scrollY}px`;
-        popupBox.style.left = `${rect.left}px`;
-    });
+    // Check if the user already exists in global.users
+    const existingUser = global.users.find((user) => user.email === email);
 
-    document.addEventListener('click', function(event) {
-        if (!popupBox.contains(event.target) && !createButton.contains(event.target)) {
-            popupBox.classList.remove('visible');
-        }
-    });
+    alert(JSON.stringify(existingUser));
+    if (existingUser) {
+        alert("User with this email already exists.");
+        return;
+    }
+
+    // Create a new User object and add it to global.users
+    const newUser = new User(email, password, username);
+    global.users.push(newUser);
+    alert(JSON.stringify(global.users));
+
+    // Save the updated users array to localStorage
+    localStorage.setItem('users', JSON.stringify(global.users));
+
+    // NOT WORKING - Optionally, save the new user in localStorage for auto login later on
+    // localStorage.setItem('user', JSON.stringify(newUser));
+
+    // Alert the user that signup was successful
+    alert("User signup successfully!");
+
+    // Redirect to the login page or another page
+    document.location.href = '/index.html';
 }
