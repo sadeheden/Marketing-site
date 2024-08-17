@@ -27,9 +27,11 @@ header {
 
 /* Navigation styling */
 nav {
-    display: flex;
+    display: contents;
+    flex: 1;
     justify-content: center;
     margin: 0 20px;
+    
 }
 
 nav a {
@@ -49,25 +51,6 @@ nav a:hover {
     align-items: center;
 }
 
-/* Input button styling */
-input[type="submit"] {
-    background-color: #6A5ACD; /* Purple color */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #5B4B8A; /* Darker purple on hover */
-}
-
-/* Profile and icons styling */
 .icons {
     display: flex;
     margin-right: 20px;
@@ -76,6 +59,20 @@ input[type="submit"]:hover {
 .icon {
     margin: 0 5px;
     font-size: 1.2em;
+}
+.create-button {
+    background-color: #6A5ACD;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-button:hover {
+    background-color: #5B4B8A;
 }
 
 .profile {
