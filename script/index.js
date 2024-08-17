@@ -44,4 +44,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+//users see the list that we created using signin
+import { global } from "./vars.js";
+
+document.addEventListener('DOMContentLoaded', () => {
+    const userTableBody = document.querySelector('#user-table tbody');
+
+    // Iterate over the global.users array and create table rows
+    global.users.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${user.username}</td>
+            <td>${user.email}</td>
+        `;
+        userTableBody.appendChild(row);
+    });
+});
 

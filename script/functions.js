@@ -3,7 +3,6 @@ import { User } from "../model/user.model.js";
 
 export function login(event) {
     event.preventDefault();
-    alert(JSON.stringify(global.users));
     const email = document.querySelector("#email").value.trim();
     const password = document.querySelector("#password").value.trim();
 
@@ -88,7 +87,6 @@ export function createNewUser(event) {
     // Check if the user already exists in global.users
     const existingUser = global.users.find((user) => user.email === email);
 
-    alert(JSON.stringify(existingUser));
     if (existingUser) {
         alert("User with this email already exists.");
         return;
@@ -97,7 +95,7 @@ export function createNewUser(event) {
     // Create a new User object and add it to global.users
     const newUser = new User(email, password, username);
     global.users.push(newUser);
-    alert(JSON.stringify(global.users));
+  
 
     // Save the updated users array to localStorage
     localStorage.setItem('users', JSON.stringify(global.users));
