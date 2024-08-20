@@ -1,89 +1,243 @@
-/* General styles */
-body {
+/* אפס הגדרות ברירת מחדל של דפדפן */
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
-background-color: rgb(163, 190, 214);
-    color: white;
-    width: fit-content;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.header {
-    display: -webkit-inline-box;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #535252;
+/* הגדרות כלליות עבור גוף הדף */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    direction: rtl;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* הגדרות עבור הכותרת העליונה */
+header {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem 2rem;
     position: fixed;
     width: 100%;
     z-index: 1000;
 }
 
-.logo img {
-    width: 100px;
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.nav a {
+/* הגדרות עבור קישור ההתחברות */
+.login-icon a {
     color: white;
-    margin-left: 50px;
     text-decoration: none;
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
+/* הגדרות עבור לוגו */
+.logo img {
+    height: 50px;
+}
+
+/* הגדרות עבור החלק המרכזי (hero) */
 .hero {
+    height: 100vh;
     position: relative;
-    height: 500px;
-    background-image:url(/photos/adam2.png);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
-
+    filter: brightness(60%);
+    z-index: 1;
 }
 
-.hero-text {
-    position: absolute;
-    bottom: 50px;
-    left: 50px;
+.hero-content {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    max-width: 700px;
+    margin-top: 400px; 
 }
 
-.hero-text h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+/* כותרת החלק המרכזי */
+.hero h1 {
+    font-size: 2.5rem; /* גודל טקסט קטן יותר */
+    margin-bottom: 2rem;
 }
 
-.play-btn,
-.info-btn {
-    background-color: rgba(255, 255, 255, 0.7);
-    color: black;
+
+.cta-button {
+    background-color: #e50914;
+    color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 20px;
-    margin-right: 10px;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #f6121d;
+}
+
+/* הגדרות עבור מקטע סרטים נוספים */
+.more-movies {
+    padding: 3rem 2rem;
+    background-color: #141414;
+}
+
+.more-movies h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* רשת סרטים */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.movie-grid img {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* הגדרות עבור מודל התחברות */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #1f1f1f;
+    color: white;
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-.play-btn:hover,
-.info-btn:hover {
-    background-color: rgba(255, 255, 255, 1);
+.close:hover {
+    color: #fff;
 }
 
-.movie-section {
-    padding: 80px 50px 20px 50px;
+#loginForm input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
 }
 
-.movie-section h2 {
-    margin-bottom: 20px;
+#loginForm button {
+    width: 100%;
+    padding: 15px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
 }
 
-.movie-row {
+#loginForm button:hover {
+    background-color: #f6121d;
+}
+/* Footer styles */
+footer {
+    background-color: #141414;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.footer-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.footer-content p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+#subscribeForm {
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem; /* Space between email field and button */
 }
 
-.movie-row img {
-    width: 200px;
+#subscribeForm input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    width: 250px;
+}
+
+#subscribeForm button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: #e50914;
+    color: white;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.2s;
 }
 
-.movie-row img:hover {
-    transform: scale(1.1);
+#subscribeForm button:hover {
+    background-color: #d40813;
 }
+
+
