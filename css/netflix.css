@@ -52,6 +52,7 @@ nav {
     justify-content: center;
     text-align: center;
     overflow: hidden;
+    object-fit: cover;
 }
 
 .hero-background {
@@ -198,7 +199,7 @@ footer {
     color: white;
     padding: 2rem;
     text-align: center;
-    margin-top: 2rem;
+   
 }
 
 .footer-content h3 {
