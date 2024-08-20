@@ -32,49 +32,6 @@ export function showUserName() {
 
     document.querySelector('#username').textContent = loginUser.username || 'Guest';
 }
-
-// export function createNewUser(event) {
-//     event.preventDefault();
-
-//     const email = document.querySelector("#email").value.trim();
-//     const password = document.querySelector("#password").value.trim();
-//     const username = document.querySelector("#name").value.trim();
-
-//     const userExists = global.users.some(user => user.email === email);
-    
-//     if (userExists) {
-//         alert('User already exists');
-//         return null;
-//     }
-
-//     const newUser = new User(email, password, username);
-//     global.users.push(newUser);
-//     localStorage.setItem('user', JSON.stringify(newUser));
-
-//     return newUser;
-// }
-
-export function saveBanner() {
-    const size = document.getElementById('size').value;
-    const color = document.getElementById('color').value;
-    const text = document.getElementById('text').value.trim();
-
-    const bannerData = { size, color, text };
-    localStorage.setItem('banner', JSON.stringify(bannerData));
-
-    displayBanner();
-}
-
-export function displayBanner() {
-    const banner = document.getElementById('banner');
-    const bannerData = JSON.parse(localStorage.getItem('banner'));
-
-    if (bannerData) {
-        banner.className = `banner ${bannerData.size}`;
-        banner.style.backgroundColor = bannerData.color;
-        banner.textContent = bannerData.text;
-    }
-}
 export function createNewUser(event) {
     // Prevent page refresh on form submission
     event.preventDefault();
@@ -109,3 +66,5 @@ export function createNewUser(event) {
     // Redirect to the login page or another page
     document.location.href = '/index.html';
 }
+
+//

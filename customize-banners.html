@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/customize-banners.css">
     <link rel="icon" type="icon" href="/photos/Designer (2).png" >
     <script type="module" src="/script/index.js"></script>
+    <script type="module" src="/script/banner.js"></script>
 </head>
 <body>
     <header>
@@ -32,22 +33,25 @@
             <h3>Customize Your Banner</h3>
             <label for="size">Banner Size:</label>
             <select id="size">
-                <option value="small">Small (300x100)</option>
-                <option value="large">Large (600x200)</option>
+                <option value="small">Box (250x250)</option>
+                <option value="large">Long (120x600)</option>
             </select>
 
             <label for="color">Background Color:</label>
             <input type="color" id="color" value="#ff0000">
-
+<br>
             <label for="text">Banner Text:</label>
             <input type="text" id="text">
+<br>
+            <label for="imageUpload">Upload Background Image:</label>
+            <input type="file" id="imageUpload" accept="image/*">
 
             <button onclick="saveBanner()">Save Banner</button>
         </div>
 
         <div class="preview">
             <h3>Banner Preview:</h3>
-            <div id="banner" class="banner"></div>
+            <div id="banner" class="banner small"></div>
         </div>
     </div>
     <!-- Footer at the bottom of the page -->

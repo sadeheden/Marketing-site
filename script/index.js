@@ -1,4 +1,4 @@
-import { login, showUserName, createNewUser, logout, saveBanner, displayBanner } from './functions.js';
+import { login, showUserName, createNewUser, logout } from './functions.js';
 
 // Login form listener on index or root page
 if (location.href.includes('index') || location.pathname === '/') {
