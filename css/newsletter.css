@@ -65,7 +65,7 @@ nav a:hover {
     display: flex;
     justify-content: center;
     gap: 30px; /* Increased gap between buttons */
-    margin: 190px auto; /* Center the container and add margin if needed */
+    margin: 175px auto; /* Center the container and add margin if needed */
 }
 
 .menu-button {
@@ -77,7 +77,7 @@ nav a:hover {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    font-size: 1.2em; /* Reduced font size for smaller buttons */
+    font-size: 1.3em; /* Reduced font size for smaller buttons */
     width: 250px; /* Reduced width */
     height: 170px; /* Reduced height */
     text-align: center;
