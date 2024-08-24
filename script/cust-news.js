@@ -1,95 +1,63 @@
-// newsletter-blue.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const bannerTextInput = document.getElementById('banner-text-blue');
-    const saveBannerTextBtn = document.getElementById('save-banner-text-blue');
-    const bannerImgInput = document.getElementById('banner-image-blue');
-    const saveBannerImgBtn = document.getElementById('save-banner-image-blue');
-    const mainImgInput = document.getElementById('main-image-blue');
-    const saveMainImgBtn = document.getElementById('save-main-image-blue');
-    const footerTextArea = document.getElementById('footer-text-blue');
-    const saveFooterTextBtn = document.getElementById('save-footer-text-blue');
-    const bgColorInput = document.getElementById('background-color-blue');
-    const saveBgColorBtn = document.getElementById('save-background-color-blue');
-    
-    const previewBannerText = document.getElementById('preview-banner-text-blue');
-    const previewBannerImg = document.getElementById('preview-banner-img-blue');
-    const previewMainImg = document.getElementById('preview-main-img-blue');
-    const previewFooterText = document.getElementById('preview-footer-text-blue');
-    const newsletterPreview = document.getElementById('newsletter-preview');
+    const bannerImageInput = document.getElementById('banner-image-blue');
+    const mainImageInput = document.getElementById('main-image-blue');
+    const footerTextInput = document.getElementById('footer-text-blue');
+    const backgroundColorInput = document.getElementById('background-color-blue');
+    const saveButton = document.getElementById('save-all');
 
-    function updatePreview() {
-        newsletterPreview.style.backgroundColor = bgColorInput.value;
-        previewBannerText.textContent = bannerTextInput.value;
-        
-        if (bannerImgInput.files[0]) {
+    // Function to update the preview based on current input values
+    const updatePreview = () => {
+        const bannerText = bannerTextInput.value;
+        const footerText = footerTextInput.value;
+        const backgroundColor = backgroundColorInput.value;
+
+        document.getElementById('preview-banner-text-blue').innerText = bannerText;
+        document.getElementById('preview-footer-text-blue').innerText = footerText;
+        document.getElementById('newsletter-preview').style.backgroundColor = backgroundColor;
+
+        if (bannerImageInput.files[0]) {
+            document.getElementById('preview-banner-img-blue').src = URL.createObjectURL(bannerImageInput.files[0]);
+        }
+        if (mainImageInput.files[0]) {
+            document.getElementById('preview-main-img-blue').src = URL.createObjectURL(mainImageInput.files[0]);
+        }
+    };
+
+    // Add event listeners to update preview as user makes changes
+    bannerTextInput.addEventListener('input', updatePreview);
+    bannerImageInput.addEventListener('change', updatePreview);
+    mainImageInput.addEventListener('change', updatePreview);
+    footerTextInput.addEventListener('input', updatePreview);
+    backgroundColorInput.addEventListener('input', updatePreview);
+
+    // Save all changes to localStorage when save button is clicked
+    saveButton.addEventListener('click', () => {
+        const bannerText = bannerTextInput.value;
+        const footerText = footerTextInput.value;
+        const backgroundColor = backgroundColorInput.value;
+
+        localStorage.setItem('bannerTextBlue', bannerText);
+
+        if (bannerImageInput.files[0]) {
             const reader = new FileReader();
-            reader.onload = function (e) {
-                previewBannerImg.src = e.target.result;
+            reader.onload = function(e) {
+                localStorage.setItem('bannerImageBlue', e.target.result);
             };
-            reader.readAsDataURL(bannerImgInput.files[0]);
+            reader.readAsDataURL(bannerImageInput.files[0]);
         }
 
-        if (mainImgInput.files[0]) {
+        if (mainImageInput.files[0]) {
             const reader = new FileReader();
-            reader.onload = function (e) {
-                previewMainImg.src = e.target.result;
+            reader.onload = function(e) {
+                localStorage.setItem('mainImageBlue', e.target.result);
             };
-            reader.readAsDataURL(mainImgInput.files[0]);
+            reader.readAsDataURL(mainImageInput.files[0]);
         }
 
-        previewFooterText.textContent = footerTextArea.value;
-    }
+        localStorage.setItem('footerTextBlue', footerText);
+        localStorage.setItem('backgroundColorBlue', backgroundColor);
 
-    saveBannerTextBtn.addEventListener('click', () => {
-        localStorage.setItem('bannerText', bannerTextInput.value);
-        updatePreview();
+        alert('All changes have been saved!');
     });
-
-    saveBannerImgBtn.addEventListener('click', () => {
-        if (bannerImgInput.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                localStorage.setItem('bannerImg', e.target.result);
-                updatePreview();
-            };
-            reader.readAsDataURL(bannerImgInput.files[0]);
-        }
-    });
-
-    saveMainImgBtn.addEventListener('click', () => {
-        if (mainImgInput.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                localStorage.setItem('mainImg', e.target.result);
-                updatePreview();
-            };
-            reader.readAsDataURL(mainImgInput.files[0]);
-        }
-    });
-
-    saveFooterTextBtn.addEventListener('click', () => {
-        localStorage.setItem('footerText', footerTextArea.value);
-        updatePreview();
-    });
-
-    saveBgColorBtn.addEventListener('click', () => {
-        localStorage.setItem('bgColor', bgColorInput.value);
-        updatePreview();
-    });
-
-    // Load saved values
-    bannerTextInput.value = localStorage.getItem('bannerText') || '';
-    footerTextArea.value = localStorage.getItem('footerText') || '';
-    bgColorInput.value = localStorage.getItem('bgColor') || '#0000ff';
-
-    if (localStorage.getItem('bannerImg')) {
-        previewBannerImg.src = localStorage.getItem('bannerImg');
-    }
-
-    if (localStorage.getItem('mainImg')) {
-        previewMainImg.src = localStorage.getItem('mainImg');
-    }
-
-    updatePreview();
 });

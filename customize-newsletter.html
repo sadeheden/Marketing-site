@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saved Banners</title>
+    <title>Custum newsletter</title>
     <link rel="stylesheet" href="/css/customize-newsletter.css">
     <link rel="icon" type="image/png" href="/photos/Designer (2).png">
     <script type="module" src="/script/index.js" defer></script>
+    <script type="module" src="/script/cust-news.js" defer></script>
 </head>
 <body>
     <header>
@@ -21,63 +22,48 @@
         </nav>
         <div class="header-right">
             <form id="logout">
-                <input type="submit" value="Logout">
+                <input type="submit" value="logout">
             </form>
             <div class="profile">👩‍🎨</div>
         </div>
     </header>
-    
-    <!DOCTYPE html>
-<html lang="en">
-<base href="/" />
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blue Newsletter Editor</title>
-    <link rel="stylesheet" href="/css/edit-news-blue.css">
-    <link rel="icon" type="icon" href="/photos/Designer (2).png">
-    <script type="module" src="/script/index.js" defer></script>
-    <script type="module" src="/script/newsletter-blue.js" defer></script>
-</head>
-<body>
+
     <main>
         <div class="container">
             <div class="editor-panel">
                 <h3>Edit Newsletter</h3>
                 <!-- Banner Text -->
                 <div class="editor-section">
-                    <label for="banner-text-blue">Banner Text:</label>
-                    <input type="text" id="banner-text-blue" placeholder="Enter banner text">
-                    <button class="save-btn" id="save-banner-text-blue">Save Banner Text</button>
+                    <label for="banner-text-blue">Header:</label>
+                    <input type="text" id="banner-text-blue" placeholder="Enter header text">
                 </div>
                 
                 <!-- Banner Image -->
                 <div class="editor-section">
-                    <label for="banner-image-blue">Banner Image:</label>
+                    <label for="banner-image-blue">Header Image:</label>
                     <input type="file" id="banner-image-blue" accept="image/*">
-                    <button class="save-btn" id="save-banner-image-blue">Save Banner Image</button>
                 </div>
                 
                 <!-- Main Image -->
                 <div class="editor-section">
                     <label for="main-image-blue">Main Image:</label>
                     <input type="file" id="main-image-blue" accept="image/*">
-                    <button class="save-btn" id="save-main-image-blue">Save Main Image</button>
                 </div>
                 
                 <!-- Footer Text -->
                 <div class="editor-section">
                     <label for="footer-text-blue">Footer Text:</label>
                     <textarea id="footer-text-blue" placeholder="Enter footer text"></textarea>
-                    <button class="save-btn" id="save-footer-text-blue">Save Footer Text</button>
                 </div>
 
                 <!-- Background Color -->
                 <div class="editor-section">
                     <label for="background-color-blue">Background Color:</label>
                     <input type="color" id="background-color-blue" value="#0000ff">
-                    <button class="save-btn" id="save-background-color-blue">Save Background Color</button>
                 </div>
+                
+                <!-- Single Save Button -->
+                <button class="save-btn" id="save-all">Save All Changes</button>
             </div>
 
             <div class="preview" style="width: 653px;">
@@ -98,16 +84,14 @@
                     </div>
                     <div class="footer-text">
                         <p id="preview-footer-text-blue">31 Emmy® Nominations for Netflix Originals. Netflix originals, including House of Cards and Orange is the New Black, received 31 Emmy® nominations. Drama, Comedy, Horror and more – there’s a Netflix original for everyone to enjoy. Discover something great to watch and enjoy your favorite shows your way.</p>
-                        <button>Enjoy Another Free Trial</button>
-                        <p>We’re always adding more.</p>
+                        <button>Subscribe</button>
+                        <p>Viva la vita</p>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-
-    
     <footer>
         <div class="footer-content">
             <div class="footer-left">
