@@ -145,8 +145,10 @@ main {
 }
 
 .preview {
-    width: 653px;
+    width: 652px;
     flex: 2;
+    text-align: center;
+ 
 }
 
 .banner {
@@ -165,6 +167,7 @@ main {
     height: auto;
     display: block;
     margin: 0 auto;
+  
 }
 
 /* Grid styling */
