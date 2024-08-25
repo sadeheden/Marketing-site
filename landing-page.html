@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<base href="/" />
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing page</title>
+    <title>Landing Page</title>
     <link rel="stylesheet" href="/css/landing-page.css">
     <link rel="icon" type="icon" href="/photos/Designer (2).png">
     <script type="module" src="/script/index.js"></script>
@@ -16,22 +15,30 @@
             <a href="/main.html">Home</a>
             <a href="/customize-banners.html">Banners</a>
             <a href="/newsletter.html">Newsletter</a>
-            <a href="/landing-page.html">Landing page</a>
-            <a href="/save.html">Saved files</a>
+            <a href="/landing-page.html">Landing Page</a>
+            <a href="/save.html">Saved Files</a>
         </nav>  
         <div class="header-right">
             <form id="logout">
-                <div><input type="submit" value="logout" /></div>
-                </form>
+                <div><input type="submit" value="Logout" /></div>
+            </form>
             <div class="profile">👩‍🎨</div>
         </div>
     </header>
 
-    <!-- Section for the Netflix-like preview -->
-    <section class="preview-section" style="padding: 20px;">
-        <h2>Site Preview</h2>
-        <iframe src="/netflix-preview.html" width="90%" height="700px" style="border: none;"></iframe>
-    </section>
+    <!-- Main content section -->
+    <div class="main-container">
+        <aside class="left-menu">
+            <h2>Edit Options</h2>
+            <button id="editPhoto">Change Photo</button>
+            <button id="editText">Change Text</button>
+            <button id="editColor">Change Background Color</button>
+        </aside>
+        <section class="preview-section">
+            <h2>Site Preview</h2>
+            <iframe src="/netflix-preview.html" id="previewFrame" style="border: none;"></iframe>
+        </section>
+    </div>
 
     <!-- Footer at the bottom of the page -->
     <footer>
