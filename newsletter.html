@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/newsletter.css">
     <link rel="icon" type="icon" href="/photos/Designer (2).png" >
     <script type="module" src="/script/index.js"></script>
+    <script type="module" src="/script/newsletter.js"></script>
 </head>
 <body>
     <header>
@@ -27,14 +28,86 @@
             <div class="profile">👩‍🎨</div>
         </div>
     </header>
-    <div class="button-container">
-        <div class="menu-button"  id="edit-example">
-            <span>Edit Example Newsletter</span>
+    <main>
+        <div class="container">
+            <div class="editor-panel">
+                <h3>Edit Newsletter</h3>
+                <!-- Banner Text -->
+                <div class="editor-section">
+                    <label for="banner-text">Newsletter Text:</label>
+                    <input type="text" id="banner-text" placeholder="Enter banner text">
+                </div>
+                
+                <!-- Banner Image -->
+                <div class="editor-section">
+                    <label for="banner-image">Newsletter Image:</label>
+                    <input type="file" id="banner-image" accept="image/*">
+                </div>
+                
+                <!-- Main Image -->
+                <div class="editor-section">
+                    <label for="main-image">Main Image:</label>
+                    <input type="file" id="main-image" accept="image/*">
+                </div>
+                
+                <!-- Footer Text -->
+                <div class="editor-section">
+                    <label for="footer-text">Footer Text:</label>
+                    <textarea id="footer-text" placeholder="Enter footer text"></textarea>
+                </div>
+
+                <!-- Additional Images -->
+                <div class="editor-section">
+                    <label for="additional-image-1">Additional Image 1:</label>
+                    <input type="file" id="additional-image-1" accept="image/*">
+                </div>
+                <div class="editor-section">
+                    <label for="additional-image-2">Additional Image 2:</label>
+                    <input type="file" id="additional-image-2" accept="image/*">
+                </div>
+                <div class="editor-section">
+                    <label for="additional-image-3">Additional Image 3:</label>
+                    <input type="file" id="additional-image-3" accept="image/*">
+                </div>
+                <div class="editor-section">
+                    <label for="additional-image-4">Additional Image 4:</label>
+                    <input type="file" id="additional-image-4" accept="image/*">
+                </div>
+
+                <!-- Background Color -->
+                <div class="editor-section" >
+                    <label for="background-color">Background Color:</label>
+                    <input type="color" id="background-color" value="#ffffff">
+                </div>
+
+                <!-- Save All Button -->
+                <div class="editor-section">
+                    <button id="save-all" class="save-btn">Save All</button>
+                </div>
+            </div>
+            <h3>Newsletter Preview:</h3>
+            <div class="preview" style="width: 653px;"id="preview-container">
+                <div class="banner">
+                    <img id="preview-banner-img" src="/photos/logo.jpg" alt="Banner Image" class="netflix-logo">
+                    <p id="preview-banner-text"><b style="font-size: 20px;">Newsletter just for you</b></p>
+                </div>
+                <div class="main-image">
+                    <img id="preview-main-img" src="/photos/תמונת בלש 2.jpg" alt="Main Image">
+                </div>
+                <div class="grid">
+                    <div class="grid-item"><img id="preview-additional-image-1" src="/photos/dark.jpg" alt="Additional Image 1"></div>
+                    <div class="grid-item"><img id="preview-additional-image-2" src="/photos/elite.jpg" alt="Additional Image 2"></div>
+                    <div class="grid-item"><img id="preview-additional-image-3" src="/photos/the wicher.jpg" alt="Additional Image 3"></div>
+                    <div class="grid-item"><img id="preview-additional-image-4" src="/photos/טיטניק.jpg" alt="Additional Image 4"></div>
+                </div>
+                <div class="footer-text">
+                    <p id="preview-footer-text">31 Emmy® Nominations for Netflix Originals. Netflix originals, including House of Cards and Orange is the New Black, received 31 Emmy® nominations. Drama, Comedy, Horror and more – there’s a Netflix original for everyone to enjoy. Discover something great to watch and enjoy your favorite shows your way.</p>
+                    <button>Enjoy Another Free Trial</button>
+                    <p>We’re always adding more.</p>
+                </div>
+            </div>
         </div>
-        <div class="menu-button" id="customize-new">
-            <span>Customize from Scratch</span>
-        </div>
-    </div>
+    </main>
 
 
     <!-- Footer at the bottom of the page -->

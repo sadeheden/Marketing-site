@@ -60,11 +60,3 @@ document.addEventListener('DOMContentLoaded', () => {
         userTableBody.appendChild(row);
     });
 });
-
-document.getElementById('edit-example').addEventListener('click', function() {
-    window.location.href = '/edit-newsletter.html'; // Adjust the path as needed
-});
-
-document.getElementById('customize-new').addEventListener('click', function() {
-    window.location.href = '/customize-newsletter.html'; // Adjust the path as needed
-});

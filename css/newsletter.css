@@ -22,6 +22,29 @@ header {
     color: #6A5ACD; /* Purple color */
     font-weight: bold;
 }
+/* Existing CSS... */
+
+/* Logo styling */
+.logo img {
+    max-width: 150px; /* Adjust this value to make the logo smaller */
+    height: auto;
+}
+
+/* Main Image styling */
+.main-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Default image styling */
+.grid-item img {
+    width: 50%;
+    height: auto;
+    border-radius: 8px;
+}
+
 
 nav {
     display: contents;
@@ -61,35 +84,106 @@ nav a:hover {
     font-size: 1.2em;
 }
 
-.button-container {
+/* Main content styling */
+main {
     display: flex;
-    justify-content: center;
-    gap: 30px; /* Increased gap between buttons */
-    margin: 175px auto; /* Center the container and add margin if needed */
+    padding: 20px;
+    justify-content: space-between;
 }
 
-.menu-button {
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+.editor-panel {
+    flex: 1;
+    max-width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.editor-section {
+    margin-bottom: 20px;
+}
+
+.editor-panel h3 {
+    margin-top: 0;
+}
+
+.editor-panel label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.editor-panel input[type="text"],
+.editor-panel input[type="file"],
+.editor-panel textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.editor-panel textarea {
+    height: 100px;
+}
+
+.editor-panel .save-btn {
     background-color: #6A5ACD;
     color: #fff;
     border: none;
-    padding: 15px 30px; /* Reduced padding for smaller buttons */
-    border-radius: 25px; /* Reduced border-radius for slightly rounded corners */
+    padding: 10px;
+    border-radius: 25px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-size: 1.3em; /* Reduced font size for smaller buttons */
-    width: 250px; /* Reduced width */
-    height: 170px; /* Reduced height */
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0; /* Remove any default margins */
+    transition: background-color 0.3s ease;
 }
 
-.menu-button:hover {
-    background-color: #524e6e;
-    transform: scale(1.05);
+.editor-panel .save-btn:hover {
+    background-color: #5B4B8A;
+}
+
+.preview {
+    width: 653px;
+    flex: 2;
+}
+
+.banner {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.banner img {
+    max-width: 100%;
+    height: 150px;
+    width: 150px;
+}
+
+.main-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Grid styling */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.grid-item {
+    flex: 1 1 calc(50% - 10px); /* Two items per row with a gap */
+}
+
+.grid-item img {
+    width: 90%;
+    height: auto;
+    border-radius: 8px;
+    margin: 5%;
+
 }
 
 footer {
