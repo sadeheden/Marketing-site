@@ -7,7 +7,7 @@ if (location.href.includes('index') || location.pathname === '/') {
 
 // Logout form listener on main and other specific pages
 if (location.href.includes('main') || location.href.includes('customize-banners') || 
-    location.href.includes('terms') || location.href.includes('privacy') ||
+    location.href.includes('terms') || location.href.includes('save') || location.href.includes('privacy') ||
     location.href.includes('newsletter') || location.href.includes('landing-page')|| location.href.includes('customize-newsletter')  ||
     location.pathname === '/') {
     document.querySelector('#logout').addEventListener('submit', logout);
