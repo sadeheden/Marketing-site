@@ -30,10 +30,27 @@
     <div class="main-container">
         <aside class="left-menu">
             <h2>Edit Options</h2>
-            <button id="editPhoto">Change Photo</button>
-            <button id="editText">Change Text</button>
-            <button id="editColor">Change Background Color</button>
+            <form id="editForm">
+                <div>
+                    <label for="photoUpload">Upload Hero Photo:</label>
+                    <input type="file" id="photoUpload">
+                </div>
+                <div>
+                    <label for="movieName">Change Movie Name:</label>
+                    <input type="text" id="movieName" placeholder="Enter movie name">
+                </div>
+                <div>
+                    <label for="buttonText">Change Button Text:</label>
+                    <input type="text" id="buttonText" placeholder="Enter button text">
+                </div>
+                <div>
+                    <label for="backgroundColor">Change Background Color:</label>
+                    <input type="color" id="backgroundColor">
+                </div>
+                <button type="submit">Apply Changes</button>
+            </form>
         </aside>
+        
         <section class="preview-section">
             <iframe src="/netflix-preview.html" id="previewFrame" style="border: none;"></iframe>
         </section>

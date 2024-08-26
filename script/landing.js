@@ -1,23 +1,31 @@
 document.getElementById('editForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    
-    // Get the form values
-    var backgroundColor = document.getElementById('backgroundColor').value;
-    var textContent = document.getElementById('textContent').value;
-    var photoUrl = document.getElementById('photoUrl').value;
-    
-    // Apply changes to the iframe content
-    var iframe = document.querySelector('.preview-section iframe');
+
+    var iframe = document.getElementById('previewFrame');
     var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-    
+
+    // Change background color
+    var backgroundColor = document.getElementById('backgroundColor').value;
     iframeDoc.body.style.backgroundColor = backgroundColor;
-    
-    var heroContent = iframeDoc.querySelector('.hero-content');
-    if (heroContent) {
-        var h1 = heroContent.querySelector('h1');
-        if (h1) h1.textContent = textContent;
-        
-        var img = iframeDoc.querySelector('.hero-background img');
-        if (img) img.src = photoUrl;
+
+    // Change movie name
+    var movieName = document.getElementById('movieName').value;
+    var h1 = iframeDoc.querySelector('.hero-content h1');
+    if (h1 && movieName) h1.textContent = movieName;
+
+    // Change button text
+    var buttonText = document.getElementById('buttonText').value;
+    var button = iframeDoc.querySelector('.hero-content .cta-button');
+    if (button && buttonText) button.textContent = buttonText;
+
+    // Upload and change hero photo
+    var photoUpload = document.getElementById('photoUpload');
+    if (photoUpload.files && photoUpload.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var img = iframeDoc.querySelector('.hero-background img');
+            if (img) img.src = e.target.result;
+        }
+        reader.readAsDataURL(photoUpload.files[0]);
     }
 });
