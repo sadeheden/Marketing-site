@@ -12,6 +12,7 @@ body {
 /* Header styling */
 header {
     display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
@@ -27,14 +28,15 @@ header {
 
 /* Navigation styling */
 nav {
-    display: contents;
+    display: flex;
     flex: 1;
     justify-content: center;
     margin: 0 20px;
+    flex-wrap: wrap; /* Allow wrapping of navigation links */
 }
 
 nav a {
-    margin: 0 20px;
+    margin: 10px 15px; /* Add more margin to separate the links */
     text-decoration: none;
     color: #333;
     font-weight: bold;
@@ -45,11 +47,14 @@ nav a:hover {
     color: #6A5ACD;
 }
 
+/* Adjust header-right to work better with wrapping */
 .header-right {
     display: flex;
     align-items: center;
+    margin-top: 10px; /* Add some top margin */
 }
 
+/* Profile styling */
 .profile {
     background-color: #e7e1ee;
     color: #fff;
@@ -147,6 +152,8 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #5B4B8A; /* Darker purple on hover */
 }
+
+/* Footer styling */
 footer {
     background-color: #fff;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
@@ -181,4 +188,159 @@ footer {
     text-align: center;
     margin-top: 10px;
     color: #666;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        margin: 10px 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    nav a {
+        margin: 10px;
+        display: inline-block; /* Ensure they wrap nicely */
+    }
+
+    .header-right {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .container {
+        flex-direction: column;
+        margin: 10px;
+        gap: 10px;
+    }
+
+    .editor {
+        width: 100%;
+    }
+
+    .preview {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #banner {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-left, .footer-right {
+        margin-top: 10px;
+    }
+
+    .footer-bottom {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1rem;
+    }
+
+    nav a {
+        margin: 5px;
+    }
+
+    .container {
+        margin: 5px;
+        gap: 5px;
+    }
+
+    .editor {
+        padding: 10px;
+    }
+
+    .preview {
+        padding: 10px;
+    }
+
+    #banner {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 12px;
+    }
+
+    .footer-content {
+        padding: 10px;
+    }
+
+    .icons img {
+        height: 20px;
+    }
+}
+/* Hamburger menu styles */
+.hamburger {
+    display: none;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+/* Hide navigation by default on smaller screens */
+nav {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block; /* Show hamburger icon */
+    }
+
+    nav {
+        display: none; /* Hide navigation links initially */
+        flex-direction: column;
+        width: 100%;
+        background-color: #fff;
+        position: absolute;
+        top: 60px; /* Position below the header */
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        border-top: 1px solid #ddd;
+    }
+
+    nav a {
+        padding: 15px 20px;
+        border-bottom: 1px solid #ddd;
+        margin: 0;
+    }
+
+    nav a:hover {
+        background-color: #f4f4f4;
+    }
+
+    /* When nav is active */
+    nav.active {
+        display: flex;
+    }
 }
