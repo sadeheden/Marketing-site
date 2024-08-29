@@ -33,7 +33,7 @@
             <h3>Customize Your Banner</h3>
             <label for="size">Banner Size:</label>
             <select id="size">
-                <option value="small">Box (250x250)</option>
+                <option value="small">Small (250x250)</option>
                 <option value="large">Long (120x600)</option>
             </select>
 
@@ -46,7 +46,8 @@
             <label for="imageUpload">Upload Background Image:</label>
             <input type="file" id="imageUpload" accept="image/*">
 
-            <button onclick="saveBanner()">Save Banner</button>
+            <button id="saveButton">Save Banner</button>
+
         </div>
 
         <div class="preview">

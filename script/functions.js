@@ -67,4 +67,3 @@ export function createNewUser(event) {
     document.location.href = '/index.html';
 }
 
-//

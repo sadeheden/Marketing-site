@@ -275,9 +275,11 @@ input {
 }
 
 h1 {
-    margin-bottom: 40px;
-    font-size: 2em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1.5em;
     color: #333;
+    text-align: center;
 }
 
 .button-container {

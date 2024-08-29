@@ -3,16 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const imageUpload = document.getElementById('banner-image');
     const mainImageUpload = document.getElementById('main-image');
     const footerTextInput = document.getElementById('footer-text');
-    const backgroundColorInput = document.getElementById('background-color'); // Added for background color
+    const backgroundColorInput = document.getElementById('background-color');
     const previewBannerText = document.getElementById('preview-banner-text');
     const previewBannerImg = document.getElementById('preview-banner-img');
     const previewMainImg = document.getElementById('preview-main-img');
     const previewFooterText = document.getElementById('preview-footer-text');
-    const previewContainer = document.getElementById('preview-container'); // Container for preview
-    const previewAdditionalImage1 = document.getElementById('preview-additional-image-1');
-    const previewAdditionalImage2 = document.getElementById('preview-additional-image-2');
-    const previewAdditionalImage3 = document.getElementById('preview-additional-image-3');
-    const previewAdditionalImage4 = document.getElementById('preview-additional-image-4');
+    const previewContainer = document.getElementById('preview-container');
+    const previewAdditionalImages = [
+        document.getElementById('preview-additional-image-1'),
+        document.getElementById('preview-additional-image-2'),
+        document.getElementById('preview-additional-image-3'),
+        document.getElementById('preview-additional-image-4')
+    ];
     const saveButton = document.getElementById('save-all');
 
     const additionalImageUploads = [
@@ -51,46 +53,40 @@ document.addEventListener('DOMContentLoaded', () => {
             if (input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = () => {
-                    switch (index) {
-                        case 0:
-                            previewAdditionalImage1.src = reader.result;
-                            break;
-                        case 1:
-                            previewAdditionalImage2.src = reader.result;
-                            break;
-                        case 2:
-                            previewAdditionalImage3.src = reader.result;
-                            break;
-                        case 3:
-                            previewAdditionalImage4.src = reader.result;
-                            break;
-                    }
+                    previewAdditionalImages[index].src = reader.result;
                 };
                 reader.readAsDataURL(input.files[0]);
             }
         });
     }
 
-    textInput.addEventListener('input', updatePreview);
-    imageUpload.addEventListener('change', updatePreview);
-    mainImageUpload.addEventListener('change', updatePreview);
-    footerTextInput.addEventListener('input', updatePreview);
-    backgroundColorInput.addEventListener('input', updatePreview); // Event listener for background color
+    function saveNewsletter() {
+        const newsletters = JSON.parse(localStorage.getItem('savedNewsletters')) || [];
 
-    additionalImageUploads.forEach(input => input.addEventListener('change', updatePreview));
-
-    saveButton.addEventListener('click', () => {
         const newsletterData = {
             bannerText: textInput.value,
             bannerImage: imageUpload.files[0] ? URL.createObjectURL(imageUpload.files[0]) : null,
             mainImage: mainImageUpload.files[0] ? URL.createObjectURL(mainImageUpload.files[0]) : null,
             footerText: footerTextInput.value,
-            backgroundColor: backgroundColorInput.value, // Save background color
+            backgroundColor: backgroundColorInput.value,
             additionalImages: additionalImageUploads.map(input => input.files[0] ? URL.createObjectURL(input.files[0]) : null)
         };
 
-        localStorage.setItem('newsletterData', JSON.stringify(newsletterData));
+        newsletters.push(newsletterData);
+        localStorage.setItem('savedNewsletters', JSON.stringify(newsletters));
 
         alert('Newsletter saved successfully!');
-    });
+        window.location.href = "/save.html";
+    }
+
+    // Event listeners for real-time preview updates
+    textInput.addEventListener('input', updatePreview);
+    imageUpload.addEventListener('change', updatePreview);
+    mainImageUpload.addEventListener('change', updatePreview);
+    footerTextInput.addEventListener('input', updatePreview);
+    backgroundColorInput.addEventListener('input', updatePreview);
+    additionalImageUploads.forEach(input => input.addEventListener('change', updatePreview));
+
+    // Save button listener
+    saveButton.addEventListener('click', saveNewsletter);
 });

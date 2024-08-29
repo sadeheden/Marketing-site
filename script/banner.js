@@ -4,27 +4,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const textInput = document.getElementById("text");
     const imageUpload = document.getElementById("imageUpload");
     const banner = document.getElementById("banner");
-
-    // Update banner preview on input changes
-    sizeSelect.addEventListener("change", updateBanner);
-    colorInput.addEventListener("input", updateBanner);
-    textInput.addEventListener("input", updateBanner);
-    imageUpload.addEventListener("change", updateBanner);
+    const saveButton = document.getElementById("saveButton");
 
     function updateBanner() {
-        // Set banner size
         const size = sizeSelect.value;
         banner.className = `banner ${size}`;
 
-        // Set banner background color
         const color = colorInput.value;
         banner.style.backgroundColor = color;
 
-        // Set banner text
         const text = textInput.value;
         banner.textContent = text;
 
-        // Set banner image
         const file = imageUpload.files[0];
         if (file) {
             const reader = new FileReader();
@@ -34,19 +25,102 @@ document.addEventListener("DOMContentLoaded", () => {
             };
             reader.readAsDataURL(file);
         } else {
-            banner.style.backgroundImage = ''; // Remove image if none selected
+            banner.style.backgroundImage = '';
         }
     }
 
-    // Save banner settings to local storage
-    window.saveBanner = function() {
-        const bannerData = {
-            size: sizeSelect.value,
-            color: colorInput.value,
-            text: textInput.value,
-            image: imageUpload.files[0] ? URL.createObjectURL(imageUpload.files[0]) : null
+    // Function to resize the image
+    function resizeImage(file, maxWidth, maxHeight, callback) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                let width = img.width;
+                let height = img.height;
+
+                // Calculate the new dimensions
+                if (width > height) {
+                    if (width > maxWidth) {
+                        height *= maxWidth / width;
+                        width = maxWidth;
+                    }
+                } else {
+                    if (height > maxHeight) {
+                        width *= maxHeight / height;
+                        height = maxHeight;
+                    }
+                }
+
+                const canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, width, height);
+                const dataUrl = canvas.toDataURL(file.type);
+                callback(dataUrl);
+            };
+            img.src = event.target.result;
         };
-        localStorage.setItem("savedBanner", JSON.stringify(bannerData));
-        window.location.href = "/save.html";
-    };
+        reader.readAsDataURL(file);
+    }
+
+    // Function to save the banner
+    function saveBanner(event) {
+        event.preventDefault();
+
+        const size = sizeSelect.value;
+        const color = colorInput.value;
+        const text = textInput.value;
+        const file = imageUpload.files[0];
+
+        const banners = JSON.parse(localStorage.getItem("savedBanners")) || [];
+        const timestamp = new Date().toLocaleString();
+
+        if (file) {
+            resizeImage(file, 300, 300, function(resizedDataUrl) {
+                const bannerData = {
+                    size: size,
+                    color: color,
+                    text: text,
+                    image: resizedDataUrl, // Use resized image
+                    savedAt: timestamp
+                };
+
+                banners.push(bannerData);
+                try {
+                    localStorage.setItem("savedBanners", JSON.stringify(banners));
+                    alert("Banner saved successfully!");
+                    window.location.href = "/save.html";
+                } catch (e) {
+                    console.error("Could not save to localStorage", e);
+                    alert("Failed to save banner. Storage limit exceeded.");
+                }
+            });
+        } else {
+            const bannerData = {
+                size: size,
+                color: color,
+                text: text,
+                image: null,
+                savedAt: timestamp
+            };
+
+            banners.push(bannerData);
+            try {
+                localStorage.setItem("savedBanners", JSON.stringify(banners));
+                alert("Banner saved successfully!");
+                window.location.href = "/save.html";
+            } catch (e) {
+                console.error("Could not save to localStorage", e);
+                alert("Failed to save banner. Storage limit exceeded.");
+            }
+        }
+    }
+
+    sizeSelect.addEventListener("change", updateBanner);
+    colorInput.addEventListener("input", updateBanner);
+    textInput.addEventListener("input", updateBanner);
+    imageUpload.addEventListener("change", updateBanner);
+
+    saveButton.addEventListener("click", saveBanner);
 });
