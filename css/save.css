@@ -445,3 +445,18 @@ table tbody tr:hover {
 table tbody tr {
     transition: background-color 0.3s ease;
 }
+#savedBannersBody img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+#savedBannersBody div {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+}
