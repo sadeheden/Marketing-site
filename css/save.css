@@ -314,7 +314,6 @@ body {
     min-height: 100vh;
 }
 
-<<<<<<< HEAD
 /* styles.css */
 
 /* Table styling */
@@ -360,10 +359,6 @@ tr:nth-child(even) {
     background-size: cover;
     background-position: center;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-/* Add this to your existing save.css */
 
 /* Popup container */
 .popup-container {
@@ -446,7 +441,7 @@ table tbody tr:hover {
 /* Add a transition for smooth color change */
 table tbody tr {
     transition: background-color 0.3s ease;
-<<<<<<< HEAD
+
 }
 #savedBannersBody img {
     max-width: 100px;
