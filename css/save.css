@@ -275,10 +275,8 @@ input {
 }
 
 h1 {
-    margin-bottom: 20px;
-    margin-top: 20px;
-    font-size: 1.5em;
-    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2em;
     color: #333;
 }
 
@@ -316,6 +314,7 @@ body {
     min-height: 100vh;
 }
 
+<<<<<<< HEAD
 /* styles.css */
 
 /* Table styling */
@@ -466,3 +465,6 @@ table tbody tr {
 >>>>>>> parent of 23bf9a8 (/)
 =======
 >>>>>>> parent of 23bf9a8 (/)
+=======
+/* Header styling */
+>>>>>>> parent of 98065e9 (banner display)
