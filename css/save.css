@@ -361,6 +361,7 @@ tr:nth-child(even) {
     background-size: cover;
     background-position: center;
 }
+<<<<<<< HEAD
 /* Add this to your existing save.css */
 
 /* Popup container */
@@ -460,3 +461,5 @@ table tbody tr {
     background-size: cover;
     background-position: center;
 }
+=======
+>>>>>>> parent of 23bf9a8 (/)

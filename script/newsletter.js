@@ -94,37 +94,3 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Newsletter saved successfully!');
     });
 });
-document.addEventListener('DOMContentLoaded', () => {
-    const textInput = document.getElementById('banner-text');
-    const imageUpload = document.getElementById('banner-image');
-    const mainImageUpload = document.getElementById('main-image');
-    const footerTextInput = document.getElementById('footer-text');
-    const backgroundColorInput = document.getElementById('background-color');
-    const additionalImageUploads = [
-        document.getElementById('additional-image-1'),
-        document.getElementById('additional-image-2'),
-        document.getElementById('additional-image-3'),
-        document.getElementById('additional-image-4')
-    ];
-    const saveButton = document.getElementById('save-all');
-
-    saveButton.addEventListener('click', () => {
-        const newsletters = JSON.parse(localStorage.getItem('savedNewsletters')) || [];
-
-        const newsletterData = {
-            bannerText: textInput.value,
-            bannerImage: imageUpload.files[0] ? URL.createObjectURL(imageUpload.files[0]) : null,
-            mainImage: mainImageUpload.files[0] ? URL.createObjectURL(mainImageUpload.files[0]) : null,
-            footerText: footerTextInput.value,
-            backgroundColor: backgroundColorInput.value,
-            additionalImages: additionalImageUploads.map(input => input.files[0] ? URL.createObjectURL(input.files[0]) : null)
-        };
-
-        newsletters.push(newsletterData);
-        localStorage.setItem('savedNewsletters', JSON.stringify(newsletters));
-
-        alert('Newsletter saved successfully!');
-        window.location.href = "/save.html";
-    });
-});
-
