@@ -463,15 +463,19 @@ table tbody tr {
     background-size: cover;
     background-position: center;
 }
-=======
->>>>>>> parent of 23bf9a8 (/)
-=======
->>>>>>> parent of 23bf9a8 (/)
-=======
-/* Header styling */
->>>>>>> parent of 98065e9 (banner display)
-=======
->>>>>>> parent of 23bf9a8 (/)
-=======
+
+#savedBannersBody img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
 }
->>>>>>> parent of f904fbf (.)
+
+#savedBannersBody div {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+}
