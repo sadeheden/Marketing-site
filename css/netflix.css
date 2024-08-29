@@ -45,7 +45,7 @@ nav {
 
 /* הגדרות עבור החלק המרכזי (hero) */
 .hero {
-    height: 85vh;
+    height: 82vh;
     position: relative;
     display: flex;
     align-items: center;
@@ -102,7 +102,8 @@ nav {
 /* הגדרות עבור מקטע סרטים נוספים */
 .more-movies {
     padding: 3rem 2rem;
-    background-color: #141414;
+text-align: center;
+font-weight: bold;
 }
 
 .more-movies h2 {

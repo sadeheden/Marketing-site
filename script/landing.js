@@ -1,50 +1,63 @@
-document.getElementById('editForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
+window.addEventListener('DOMContentLoaded', function() {
     var iframe = document.getElementById('previewFrame');
-    var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-    if (!iframeDoc) {
-        console.error("Could not access iframe document.");
-        return;
-    }
+    iframe.addEventListener('load', function() {
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-    // Change background color
-    var backgroundColor = document.getElementById('backgroundColor').value;
-    console.log("Changing background color to:", backgroundColor);
-    iframeDoc.body.style.backgroundColor = backgroundColor;
-
-    // Change movie name
-    var movieName = document.getElementById('movieName').value;
-    var h1 = iframeDoc.querySelector('.hero-content h1');
-    if (h1 && movieName) {
-        console.log("Changing movie name to:", movieName);
-        h1.textContent = movieName;
-    } else {
-        console.error("Could not find the movie name element or the input was empty.");
-    }
-
-    // Change button text
-    var buttonText = document.getElementById('buttonText').value;
-    var button = iframeDoc.querySelector('.hero-content .cta-button');
-    if (button && buttonText) {
-        console.log("Changing button text to:", buttonText);
-        button.textContent = buttonText;
-    } else {
-        console.error("Could not find the button element or the input was empty.");
-    }
-
-    // Upload and change hero photo
-    var photoUpload = document.getElementById('photoUpload');
-    if (photoUpload.files && photoUpload.files[0]) {
-        console.log("Changing hero image.");
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var img = iframeDoc.querySelector('.hero-background img');
-            if (img) img.src = e.target.result;
+        // Change background color
+        var backgroundColorInput = document.getElementById('backgroundColor');
+        if (backgroundColorInput) {
+            backgroundColorInput.addEventListener('input', function() {
+                iframeDoc.querySelector('.more-movies').style.backgroundColor = this.value;
+            });
         }
-        reader.readAsDataURL(photoUpload.files[0]);
-    } else {
-        console.error("No file selected for upload.");
-    }
+
+        // Change movie name (inside .more-movies)
+        var movieNameInput = document.getElementById('movieName');
+        if (movieNameInput) {
+            movieNameInput.addEventListener('input', function() {
+                var h1 = iframeDoc.querySelector('.more-movies h1');
+                if (h1 && this.value) {
+                    h1.textContent = this.value;
+                }
+            });
+        }
+
+        // Change hero title
+        var heroTitleInput = document.getElementById('heroTitle');
+        if (heroTitleInput) {
+            heroTitleInput.addEventListener('input', function() {
+                var h1 = iframeDoc.querySelector('.hero-content h1');
+                if (h1 && this.value) {
+                    h1.textContent = this.value;
+                }
+            });
+        }
+
+        // Change button text
+        var buttonTextInput = document.getElementById('buttonText');
+        if (buttonTextInput) {
+            buttonTextInput.addEventListener('input', function() {
+                var button = iframeDoc.querySelector('.hero-content .cta-button');
+                if (button && this.value) {
+                    button.textContent = this.value;
+                }
+            });
+        }
+
+        // Upload and change hero photo
+        var photoUploadInput = document.getElementById('photoUpload');
+        if (photoUploadInput) {
+            photoUploadInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var img = iframeDoc.querySelector('.hero-background img');
+                        if (img) img.src = e.target.result;
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        }
+    });
 });
