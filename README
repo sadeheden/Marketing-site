@@ -1,0 +1,30 @@
+Marketing Site Project -Shenkar 2024
+Overview
+This project is a collaborative effort between Eden, Matan, and Shirly to create a dynamic marketing website using HTML, CSS, and JavaScript. The website aims to simulate the creation of banners, newsletters, and landing pages, allowing users to customize text, photos, and colors. Additionally, the site includes features for saving creations for later use, requiring users to log in or sign up.
+
+Features
+Banner Editor: Users can create banners in standard sizes (250x250 and 120x600), customize text, background colors, and insert images.
+Newsletter Editor: Allows customization of newsletter content, including text, photos, and background colors. Users can preview changes in real-time.
+Landing Page Editor: Provides tools to design landing pages with editable text, images, and layout options.
+Save and Retrieve: Users can save their creations for future editing or reuse after logging into their accounts.
+Authentication: Requires users to log in or sign up to access editing and saving features.
+Technologies Used
+Frontend: HTML, CSS, JavaScript
+Storage: Local storage for saving user data and creations
+Getting Started
+To run the project locally:
+
+Clone this repository.
+Open index.html in your web browser.
+Usage
+Sign Up/Login: Create an account or log in to access the editor.
+Create/Edit: Use the navigation to choose between banner, newsletter, or landing page editors.
+Customize: Modify text, images, and colors as desired.
+Save: Save your creations to your account for later use.
+Preview: View previews of your creations before saving or publishing.
+Contributors
+Eden
+Matan
+Shirly
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
