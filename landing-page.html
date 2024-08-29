@@ -6,9 +6,7 @@
     <title>Landing Page</title>
     <link rel="stylesheet" href="/css/landing-page.css">
     <link rel="icon" type="icon" href="/photos/Designer (2).png">
-    <script type="module" src="/script/index.js"></script>
-   <script type="module" src="/script/landing.js"></script>
-
+    <script src="/script/landing.js"></script> 
 </head>
 <body>
     <header>
@@ -28,42 +26,54 @@
         </div>
     </header>
 
-    <!-- Main content section -->
-    <div class="main-container">
-        <aside class="left-menu">
+    <div id="builder-container">
+        <div id="edit-options">
             <h2>Edit Options</h2>
-            <form id="editForm">
-                <div>
-                    <label for="photoUpload">Upload Hero Photo:</label>
-                    <input type="file" id="photoUpload">
-                </div>
-                <div>
-                    <label for="heroTitle">Change Hero Title:</label>
-                    <input type="text" id="heroTitle" placeholder="Enter new title">
-                </div>
-                <div>
-                    <label for="movieName">Add hero text:</label>
-                    <input type="text" id="movieName" placeholder="Enter movie name">
-                </div>
-                <div>
-                    <label for="buttonText">Change Button Text:</label>
-                    <input type="text" id="buttonText" placeholder="Enter button text">
-                </div>
-                <div>
-                    <label for="backgroundColor">Change Background Color:</label>
-                    <input type="color" id="backgroundColor">
-                </div>
-                <button id="save-all" class="save-btn">Save Landing Page</button>
+            <form id="landing-form">
+                <label for="layout-choice">Choose Layout:</label>
+                <select id="layout-choice" name="layout-choice" onchange="selectLayout()">
+                    <option value="layout1">Layout 1</option>
+                    <option value="layout2">Layout 2</option>
+                    <option value="layout3">Layout 3</option>
+                </select><br><br>
+                <label for="logo-photo">Upload Logo Photo:</label>
+                <input type="file" id="logo-photo" name="logo-photo"><br><br>
+                
+                <label for="company-name">Company Name:</label>
+                <input type="text" id="company-name" name="company-name" placeholder="Enter company name"><br><br>
 
+                <label for="hero-photo">Upload Hero Photo:</label>
+                <input type="file" id="hero-photo" name="hero-photo"><br><br>
+    
+                <label for="hero-title">Change Hero Title:</label>
+                <input type="text" id="hero-title" name="hero-title" placeholder="Enter new title"><br><br>
+    
+                <label for="header-color">Menu Header Color:</label>
+                <input type="color" id="header-color" name="header-color"><br><br>
+    
+                <label for="num-photos">Number of Photos in Body:</label>
+                <input type="number" id="num-photos" name="num-photos" min="1" max="20" onchange="generatePhotoInputs()"><br><br>
+    
+                <div id="photo-uploads"></div>
+
+                <label for="body-text">Body Text:</label>
+                <textarea id="body-text" name="body-text" placeholder="Enter body text"></textarea><br><br>
+    
+    
+                <label for="bg-color">Change Background Color:</label>
+                <input type="color" id="bg-color" name="bg-color"><br><br>
+
+                <button type="button" onclick="generateLandingPage()">Submit</button>
             </form>
-        </aside>
+        </div>
+        <div id="preview">
         
-        <section class="preview-section">
-            <iframe src="/netflix-preview.html" id="previewFrame" style="border: none;"></iframe>
-        </section>
+            <div id="preview-content"></div>
+           
+            </section>
+            
+        </div>
     </div>
-
-    <!-- Footer at the bottom of the page -->
     <footer>
         <div class="footer-content" style="text-align: center;">
             <div class="footer-left" style="display: inline-block; margin-right: 20px;">

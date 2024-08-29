@@ -1,82 +1,123 @@
-window.addEventListener('DOMContentLoaded', function() {
-    const iframe = document.getElementById('previewFrame');
-    const saveButton = document.getElementById('save-all'); // Ensure this ID matches the button in your HTML
-    const backgroundColorInput = document.getElementById('backgroundColor');
-    const movieNameInput = document.getElementById('movieName');
-    const heroTitleInput = document.getElementById('heroTitle');
-    const buttonTextInput = document.getElementById('buttonText');
-    const photoUploadInput = document.getElementById('photoUpload');
+function generatePhotoInputs() {
+    const numPhotos = document.getElementById('num-photos').value;
+    const photoUploadsDiv = document.getElementById('photo-uploads');
 
-    iframe.addEventListener('load', function() {
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    // Clear previous photo inputs
+    photoUploadsDiv.innerHTML = '';
 
-        backgroundColorInput.addEventListener('input', function() {
-            iframeDoc.querySelector('.more-movies').style.backgroundColor = this.value;
-        });
+    for (let i = 0; i < numPhotos; i++) {
+        const photoInput = document.createElement('input');
+        photoInput.type = 'file';
+        photoInput.name = `body-photo-${i + 1}`;
+        photoInput.id = `body-photo-${i + 1}`;
+        photoUploadsDiv.appendChild(photoInput);
+        photoUploadsDiv.appendChild(document.createElement('br'));
+    }
+}
 
-        movieNameInput.addEventListener('input', function() {
-            const h1 = iframeDoc.querySelector('.more-movies h1');
-            if (h1 && this.value) {
-                h1.textContent = this.value;
-            }
-        });
+function generateLandingPage() {
+    // Hide the edit options and show the preview
+    document.getElementById('edit-options').style.display = 'none';
+    document.getElementById('preview').style.display = 'block';
 
-        heroTitleInput.addEventListener('input', function() {
-            const h1 = iframeDoc.querySelector('.hero-content h1');
-            if (h1 && this.value) {
-                h1.textContent = this.value;
-            }
-        });
+    // Get form data
+    const layout = document.getElementById('layout-choice').value;
+    const logo = document.getElementById('logo-photo').files[0];
+    const companyName = document.getElementById('company-name').value;
+    const photo = document.getElementById('hero-photo').files[0];
+    const title = document.getElementById('hero-title').value;
+    const headerColor = document.getElementById('header-color').value;
+    const numPhotos = document.getElementById('num-photos').value;
+    const bodyText = document.getElementById('body-text').value;
+    const bgColor = document.getElementById('bg-color').value;
 
-        buttonTextInput.addEventListener('input', function() {
-            const button = iframeDoc.querySelector('.hero-content .cta-button');
-            if (button && this.value) {
-                button.textContent = this.value;
-            }
-        });
+    let previewContent = `<div style="background-color: ${bgColor}; padding: 20px;">`;
 
-        photoUploadInput.addEventListener('change', function() {
-            if (this.files && this.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = iframeDoc.querySelector('.hero-background img');
-                    if (img) img.src = e.target.result;
-                }
-                reader.readAsDataURL(this.files[0]);
-            }
-        });
-    });
+    // Build header content
+    previewContent += `<header style="background-color: ${headerColor}; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;">`;
 
-    function getBase64(file, callback) {
+    if (logo) {
         const reader = new FileReader();
-        reader.onload = () => callback(reader.result);
-        reader.readAsDataURL(file);
-    }
-
-    saveButton.addEventListener('click', function() {
-        const landingPageData = {
-            backgroundColor: backgroundColorInput.value,
-            movieName: movieNameInput.value,
-            heroTitle: heroTitleInput.value,
-            buttonText: buttonTextInput.value,
-            photoUpload: null,
+        reader.onload = function (e) {
+            previewContent += `<div class="logo"><img src="${e.target.result}" alt="Company Logo" style="height: 50px;"></div>`;
+            finalizePreview();
         };
-
-        if (photoUploadInput.files[0]) {
-            getBase64(photoUploadInput.files[0], (result) => {
-                landingPageData.photoUpload = result;
-                saveLandingPageData(landingPageData);
-            });
-        } else {
-            saveLandingPageData(landingPageData);
-        }
-    });
-
-    function saveLandingPageData(data) {
-        const landingPages = JSON.parse(localStorage.getItem('savedLandingPages')) || [];
-        landingPages.push(data);
-        localStorage.setItem('savedLandingPages', JSON.stringify(landingPages));
-        alert('Landing page saved successfully!');
-        window.location.href = "/save.html";  // Redirect to the saved files page after saving
+        reader.readAsDataURL(logo);
+    } else {
+        finalizePreview();
     }
-});
+
+    function finalizePreview() {
+        previewContent += `<div class="company-name">${companyName}</div>
+                           <nav>
+                               <button>Home</button>
+                               <button>About</button>
+                               <button>Contact</button>
+                           </nav>
+                           </header>`;
+        
+        previewContent += `<section class="hero">
+                              <h1>${title}</h1>`;
+        
+        if (photo) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewContent += `<img src="${e.target.result}" alt="Hero Image" style="width: 100%;"><br>`;
+                appendPhotos();
+            };
+            reader.readAsDataURL(photo);
+        } else {
+            appendPhotos();
+        }
+    }
+
+    function appendPhotos() {
+        previewContent += `<section class="photo-grid">`;
+
+        for (let i = 0; i < numPhotos; i++) {
+            const fileInput = document.querySelector(`#body-photo-${i + 1}`);
+            if (fileInput && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewContent += `<img src="${e.target.result}" alt="Body Image ${i + 1}" style="width: 100px; height: 100px; margin: 5px; float: left;">`;
+                    document.getElementById('preview-content').innerHTML = previewContent;
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+        // Wrap body text around the photos
+        previewContent += `</section>`;
+        previewContent += `<p style="clear: both; text-wrap: wrap;">${bodyText}</p>`;
+
+        // Add the email sign-up section before the back and save buttons
+        previewContent += `<section id="email-signup-section" style="text-align: center; margin-top: 20px;">
+                               <div class="signup-box">
+                                   <h3>Stay Updated!</h3>
+                                   <p>Sign up with your email to receive the latest updates and exclusive offers.</p>
+                                   <form id="email-signup-form">
+                                       <input type="email" id="signup-email" placeholder="Enter your email" required>
+                                       <button type="submit">Sign Up</button>
+                                   </form>
+                               </div>
+                           </section>`;
+
+        // Add the Back and Save buttons with better styling
+        previewContent += `<div style="text-align: center; margin-top: 20px;">
+                               <button onclick="goBack()" class="preview-button back-button">Back</button>
+                               <button onclick="saveLandingPage()" class="preview-button save-button">Save</button>
+                           </div>`;
+
+        document.getElementById('preview-content').innerHTML = previewContent;
+    }
+}
+
+function goBack() {
+    // Show the edit options and hide the preview
+    document.getElementById('edit-options').style.display = 'block';
+    document.getElementById('preview').style.display = 'none';
+}
+
+function saveLandingPage() {
+    alert('Landing page saved!'); // Replace with actual save functionality
+}
