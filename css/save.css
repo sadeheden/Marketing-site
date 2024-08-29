@@ -446,6 +446,7 @@ table tbody tr:hover {
 /* Add a transition for smooth color change */
 table tbody tr {
     transition: background-color 0.3s ease;
+<<<<<<< HEAD
 }
 #savedBannersBody img {
     max-width: 100px;
@@ -471,3 +472,6 @@ table tbody tr {
 >>>>>>> parent of 98065e9 (banner display)
 =======
 >>>>>>> parent of 23bf9a8 (/)
+=======
+}
+>>>>>>> parent of f904fbf (.)
