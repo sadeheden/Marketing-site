@@ -31,24 +31,40 @@
     <div class="container">
         <div class="editor">
             <h3>Customize Your Banner</h3>
+        
             <label for="size">Banner Size:</label>
             <select id="size">
                 <option value="small">Small (250x250)</option>
                 <option value="large">Long (120x600)</option>
             </select>
-
+        
             <label for="color">Background Color:</label>
             <input type="color" id="color" value="#ff0000">
-<br>
+            <br>
+        
             <label for="text">Banner Text:</label>
             <input type="text" id="text">
-<br>
+            <br>
+        
+            <label for="textStyle">Text Style:</label>
+            <select id="textStyle">
+                <option value="normal">Normal</option>
+                <option value="bold">Bold</option>
+                <option value="italic">Italic</option>
+                <option value="bold italic">Bold & Italic</option>
+            </select>
+            <br>
+        
+            <label for="textSize">Text Size:</label>
+            <input type="number" id="textSize" value="16" min="10" max="100"> px
+            <br>
+        
             <label for="imageUpload">Upload Background Image:</label>
             <input type="file" id="imageUpload" accept="image/*">
-
+        
             <button id="saveButton">Save Banner</button>
-
         </div>
+        
 
         <div class="preview">
             <div id="banner" class="banner small"></div>

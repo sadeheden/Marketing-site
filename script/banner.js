@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const sizeSelect = document.getElementById("size");
     const colorInput = document.getElementById("color");
     const textInput = document.getElementById("text");
+    const textStyleSelect = document.getElementById("textStyle");
+    const textSizeInput = document.getElementById("textSize");
     const imageUpload = document.getElementById("imageUpload");
     const banner = document.getElementById("banner");
     const saveButton = document.getElementById("saveButton");
@@ -14,6 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
         banner.style.backgroundColor = color;
 
         const text = textInput.value;
+        const textStyle = textStyleSelect.value;
+        const textSize = `${textSizeInput.value}px`;
+
+        // Apply text style
+        banner.style.fontWeight = textStyle.includes('bold') ? 'bold' : 'normal';
+        banner.style.fontStyle = textStyle.includes('italic') ? 'italic' : 'normal';
+        banner.style.fontSize = textSize;
+
         banner.textContent = text;
 
         const file = imageUpload.files[0];
@@ -71,6 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const size = sizeSelect.value;
         const color = colorInput.value;
         const text = textInput.value;
+        const textStyle = textStyleSelect.value;
+        const textSize = `${textSizeInput.value}px`;
         const file = imageUpload.files[0];
 
         const banners = JSON.parse(localStorage.getItem("savedBanners")) || [];
@@ -82,6 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     size: size,
                     color: color,
                     text: text,
+                    textStyle: textStyle,
+                    textSize: textSize,
                     image: resizedDataUrl, // Use resized image
                     savedAt: timestamp
                 };
@@ -101,6 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 size: size,
                 color: color,
                 text: text,
+                textStyle: textStyle,
+                textSize: textSize,
                 image: null,
                 savedAt: timestamp
             };
@@ -120,6 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
     sizeSelect.addEventListener("change", updateBanner);
     colorInput.addEventListener("input", updateBanner);
     textInput.addEventListener("input", updateBanner);
+    textStyleSelect.addEventListener("change", updateBanner);
+    textSizeInput.addEventListener("input", updateBanner);
     imageUpload.addEventListener("change", updateBanner);
 
     saveButton.addEventListener("click", saveBanner);

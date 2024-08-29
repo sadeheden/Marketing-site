@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const banners = JSON.parse(localStorage.getItem("savedBanners")) || [];
+    let banners = JSON.parse(localStorage.getItem("savedBanners")) || [];
     const savedBannersBody = document.getElementById("savedBannersBody");
     const popupContainer = document.getElementById("popupContainer");
     const popupContent = document.getElementById("popupPreviewContent");
@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         content += `<p>Text: ${data.text}</p>`;
         content += `<p>Size: ${getSizeDisplayName(data.size)}</p>`;
+        content += `<p>Text Style: ${data.textStyle}</p>`;
+        content += `<p>Text Size: ${data.textSize}</p>`;
         content += `<p style="background-color:${data.color}; padding: 10px; color: white;">Color: ${data.color}</p>`;
 
         return content;
@@ -46,6 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Sort banners by savedAt timestamp, newest first
+    banners.sort((a, b) => new Date(b.savedAt) - new Date(a.savedAt));
+
     if (banners.length > 0) {
         banners.forEach((bannerData) => {
             const row = document.createElement("tr");
@@ -53,6 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const previewCell = document.createElement("td");
             const sizeCell = document.createElement("td");
             const textCell = document.createElement("td");
+            const styleCell = document.createElement("td");
+            const textSizeCell = document.createElement("td");
             const colorCell = document.createElement("td");
             const savedAtCell = document.createElement("td");
 
@@ -71,6 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
             previewCell.appendChild(preview);
             sizeCell.textContent = getSizeDisplayName(bannerData.size);
             textCell.textContent = bannerData.text || 'No Text';
+            styleCell.textContent = bannerData.textStyle || 'Normal';
+            textSizeCell.textContent = bannerData.textSize || 'Default Size';
             colorCell.style.backgroundColor = bannerData.color;
             colorCell.textContent = bannerData.color || 'No Color';
             savedAtCell.textContent = bannerData.savedAt || 'Unknown';
@@ -78,6 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
             row.appendChild(previewCell);
             row.appendChild(sizeCell);
             row.appendChild(textCell);
+            row.appendChild(styleCell);
+            row.appendChild(textSizeCell);
             row.appendChild(colorCell);
             row.appendChild(savedAtCell);
             savedBannersBody.appendChild(row);
@@ -91,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         const noDataRow = document.createElement("tr");
         const noDataCell = document.createElement("td");
-        noDataCell.colSpan = 5; // Adjusted for the new column
+        noDataCell.colSpan = 7; // Adjusted for the new columns
         noDataCell.textContent = "No banners saved.";
         noDataRow.appendChild(noDataCell);
         savedBannersBody.appendChild(noDataRow);
