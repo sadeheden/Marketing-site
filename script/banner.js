@@ -1,3 +1,5 @@
+import { saveBanner } from './functions.js';
+
 document.addEventListener("DOMContentLoaded", () => {
     const sizeSelect = document.getElementById("size");
     const colorInput = document.getElementById("color");
@@ -38,15 +40,54 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Save banner settings to local storage
-    window.saveBanner = function() {
-        const bannerData = {
-            size: sizeSelect.value,
-            color: colorInput.value,
-            text: textInput.value,
-            image: imageUpload.files[0] ? URL.createObjectURL(imageUpload.files[0]) : null
+    // Updated saveBanner function to save multiple banners
+    function saveBanner(event) {
+        event.preventDefault(); // Prevent form submission if within a form
+
+        const size = sizeSelect.value;
+        const color = colorInput.value;
+        const text = textInput.value;
+        const file = imageUpload.files[0];
+
+        // Retrieve existing banners from localStorage or initialize an empty array
+        const banners = JSON.parse(localStorage.getItem("savedBanners")) || [];
+
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            const bannerData = {
+                size: size, // Save the selected size
+                color: color,
+                text: text,
+                image: reader.result // Use Base64 string for image
+            };
+            
+            // Add the new banner to the banners array
+            banners.push(bannerData);
+
+            // Save the updated array back to localStorage
+            localStorage.setItem("savedBanners", JSON.stringify(banners));
+            window.location.href = "/save.html";
         };
-        localStorage.setItem("savedBanner", JSON.stringify(bannerData));
-        window.location.href = "/save.html";
-    };
+        
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            const bannerData = {
+                size: size, // Save the selected size
+                color: color,
+                text: text,
+                image: null
+            };
+
+            // Add the new banner to the banners array
+            banners.push(bannerData);
+
+            // Save the updated array back to localStorage
+            localStorage.setItem("savedBanners", JSON.stringify(banners));
+            window.location.href = "/save.html";
+        }
+    }
+
+    // Save button event listener
+    document.getElementById("saveButton").addEventListener("click", saveBanner);
 });

@@ -68,3 +68,34 @@ export function createNewUser(event) {
 }
 
 //
+export function saveBanner() {
+    const sizeSelect = document.getElementById("size");
+    const colorInput = document.getElementById("color");
+    const textInput = document.getElementById("text");
+    const imageUpload = document.getElementById("imageUpload");
+
+    const reader = new FileReader();
+    reader.onloadend = function() {
+        const bannerData = {
+            size: sizeSelect.value,
+            color: colorInput.value,
+            text: textInput.value,
+            image: reader.result // Use Base64 string for image
+        };
+        localStorage.setItem("savedBanner", JSON.stringify(bannerData));
+        window.location.href = "/save.html";
+    };
+    
+    if (imageUpload.files[0]) {
+        reader.readAsDataURL(imageUpload.files[0]);
+    } else {
+        const bannerData = {
+            size: sizeSelect.value,
+            color: colorInput.value,
+            text: textInput.value,
+            image: null
+        };
+        localStorage.setItem("savedBanner", JSON.stringify(bannerData));
+        window.location.href = "/save.html";
+    }
+}
