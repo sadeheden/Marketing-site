@@ -10,7 +10,6 @@ Save and Retrieve: Users can save their creations for future editing or reuse af
 Authentication: Requires users to log in or sign up to access editing and saving features.
 Technologies Used
 Frontend: HTML, CSS, JavaScript
-Backend: (Specify if applicable, e.g., Node.js, Flask)
 Storage: Local storage for saving user data and creations
 Getting Started
 To run the project locally:
