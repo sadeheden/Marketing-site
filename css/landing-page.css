@@ -300,6 +300,15 @@ footer {
     margin: 10px;
     transition: background-color 0.3s ease;
 }
+/* Updated body text styling */
+.body-text {
+    padding: 20px;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
 
 .back-button {
     background-color: #f0ad4e; /* Orange */

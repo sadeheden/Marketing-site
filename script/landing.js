@@ -15,6 +15,16 @@ function generatePhotoInputs() {
     }
 }
 
+function goBack() {
+    // Show the edit options and hide the preview
+    document.getElementById('edit-options').style.display = 'block';
+    document.getElementById('preview').style.display = 'none';
+}
+
+function saveLandingPage() {
+    alert('Landing page saved!'); // Replace with actual save functionality
+}
+////fix part of the peview photos
 function generateLandingPage() {
     // Hide the edit options and show the preview
     document.getElementById('edit-options').style.display = 'none';
@@ -58,7 +68,7 @@ function generateLandingPage() {
         
         previewContent += `<section class="hero">
                               <h1>${title}</h1>`;
-        
+
         if (photo) {
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -72,52 +82,48 @@ function generateLandingPage() {
     }
 
     function appendPhotos() {
-        previewContent += `<section class="photo-grid">`;
-
+        let imagesLoaded = 0;
+        previewContent += `<section class="photo-grid layout${layout.slice(-1)}">`;
+    
         for (let i = 0; i < numPhotos; i++) {
             const fileInput = document.querySelector(`#body-photo-${i + 1}`);
             if (fileInput && fileInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
-                    previewContent += `<img src="${e.target.result}" alt="Body Image ${i + 1}" style="width: 100px; height: 100px; margin: 5px; float: left;">`;
-                    document.getElementById('preview-content').innerHTML = previewContent;
+                    previewContent += `<img src="${e.target.result}" alt="Body Image ${i + 1}" style="max-width: 100%; height: auto; margin: 5px auto;">`;
+                    imagesLoaded++;
+                    if (imagesLoaded == numPhotos) {
+                        finishPreview();
+                    }
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             }
         }
-
-        // Wrap body text around the photos
-        previewContent += `</section>`;
-        previewContent += `<p style="clear: both; text-wrap: wrap;">${bodyText}</p>`;
-
-        // Add the email sign-up section before the back and save buttons
-        previewContent += `<section id="email-signup-section" style="text-align: center; margin-top: 20px;">
-                               <div class="signup-box">
-                                   <h3>Stay Updated!</h3>
-                                   <p>Sign up with your email to receive the latest updates and exclusive offers.</p>
-                                   <form id="email-signup-form">
-                                       <input type="email" id="signup-email" placeholder="Enter your email" required>
-                                       <button type="submit">Sign Up</button>
-                                   </form>
-                               </div>
-                           </section>`;
-
-        // Add the Back and Save buttons with better styling
-        previewContent += `<div style="text-align: center; margin-top: 20px;">
-                               <button onclick="goBack()" class="preview-button back-button">Back</button>
-                               <button onclick="saveLandingPage()" class="preview-button save-button">Save</button>
-                           </div>`;
-
-        document.getElementById('preview-content').innerHTML = previewContent;
+    
+        function finishPreview() {
+            previewContent += `</section>`;
+            previewContent += `<p class="body-text" style="clear: both;">${bodyText}</p>`;
+    
+            // Add the email sign-up section before the back and save buttons
+            previewContent += `<section id="email-signup-section" style="text-align: center; margin-top: 20px;">
+                                   <div class="signup-box">
+                                       <h3>Stay Updated!</h3>
+                                       <p>Sign up with your email to receive the latest updates and exclusive offers.</p>
+                                       <form id="email-signup-form">
+                                           <input type="email" id="signup-email" placeholder="Enter your email" required>
+                                           <button type="submit">Sign Up</button>
+                                       </form>
+                                   </div>
+                               </section>`;
+    
+            // Add the Back and Save buttons with better styling
+            previewContent += `<div style="text-align: center; margin-top: 20px;">
+                                   <button onclick="goBack()" class="preview-button back-button">Back</button>
+                                   <button onclick="saveLandingPage()" class="preview-button save-button">Save</button>
+                               </div>`;
+    
+            document.getElementById('preview-content').innerHTML = previewContent;
+        }
     }
-}
-
-function goBack() {
-    // Show the edit options and hide the preview
-    document.getElementById('edit-options').style.display = 'block';
-    document.getElementById('preview').style.display = 'none';
-}
-
-function saveLandingPage() {
-    alert('Landing page saved!'); // Replace with actual save functionality
+    
 }
