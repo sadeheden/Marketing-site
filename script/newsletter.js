@@ -24,6 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('additional-image-4')
     ];
 
+    function convertImageToDataURL(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+            reader.readAsDataURL(file);
+        });
+    }
+
     function updatePreview() {
         previewBannerText.textContent = textInput.value;
 
@@ -60,24 +69,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function saveNewsletter() {
+    async function saveNewsletter() {
         const newsletters = JSON.parse(localStorage.getItem('savedNewsletters')) || [];
-
+    
+        const bannerImage = document.getElementById('banner-image').files[0] ? await resizeImage(document.getElementById('banner-image').files[0], 800, 600) : null;
+        const mainImage = document.getElementById('main-image').files[0] ? await resizeImage(document.getElementById('main-image').files[0], 800, 600) : null;
+        const additionalImages = await Promise.all(Array.from(document.querySelectorAll('[id^="additional-image-"]')).map(input => input.files[0] ? resizeImage(input.files[0], 800, 600) : null));
+    
         const newsletterData = {
-            bannerText: textInput.value,
-            bannerImage: imageUpload.files[0] ? URL.createObjectURL(imageUpload.files[0]) : null,
-            mainImage: mainImageUpload.files[0] ? URL.createObjectURL(mainImageUpload.files[0]) : null,
-            footerText: footerTextInput.value,
-            backgroundColor: backgroundColorInput.value,
-            additionalImages: additionalImageUploads.map(input => input.files[0] ? URL.createObjectURL(input.files[0]) : null)
+            bannerText: document.getElementById('banner-text').value || '', 
+            bannerImage: bannerImage, 
+            mainImage: mainImage, 
+            footerText: document.getElementById('footer-text').value || '', 
+            backgroundColor: document.getElementById('background-color').value || '#ffffff', 
+            additionalImages: additionalImages
         };
-
-        newsletters.push(newsletterData);
-        localStorage.setItem('savedNewsletters', JSON.stringify(newsletters));
-
-        alert('Newsletter saved successfully!');
-        window.location.href = "/save.html";
+    
+        try {
+            newsletters.push(newsletterData);
+            localStorage.setItem('savedNewsletters', JSON.stringify(newsletters));
+            console.log('Newsletter saved:', newsletterData); // Debugging output
+            alert('Newsletter saved successfully!');
+            window.location.href = "/save.html";  // Redirect to save.html after saving
+        } catch (e) {
+            if (e.name === 'QuotaExceededError') {
+                alert('Error saving newsletter: Storage limit exceeded.');
+            } else {
+                throw e;
+            }
+        }
     }
+    
 
     // Event listeners for real-time preview updates
     textInput.addEventListener('input', updatePreview);
@@ -90,24 +112,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Save button listener
     saveButton.addEventListener('click', saveNewsletter);
 });
-import { showPopup, closePopup, handleFormSubmit } from './functionsMain.js';
+function resizeImage(file, maxWidth, maxHeight) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
 
-document.addEventListener("DOMContentLoaded", function() {
-    const popup = document.querySelector(".popup-container");
-    const closeBtn = popup.querySelector(".close-btn");
-    const form = popup.querySelector("form");
+            if (width > maxWidth || height > maxHeight) {
+                if (width > height) {
+                    height *= maxWidth / width;
+                    width = maxWidth;
+                } else {
+                    width *= maxHeight / height;
+                    height = maxHeight;
+                }
+            }
 
-    // Show the popup when the page loads
-    showPopup(popup);
-
-    // Close the popup when the close button is clicked
-    closeBtn.addEventListener("click", function() {
-        closePopup(popup);
+            canvas.width = width;
+            canvas.height = height;
+            canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', 0.7));  // Reduce quality for smaller size
+        };
+        img.onerror = reject;
+        img.src = URL.createObjectURL(file);
     });
-
-    // Handle form submission
-    form.addEventListener("submit", function(event) {
-        handleFormSubmit(event, popup);
-    });
-});
-
+}
