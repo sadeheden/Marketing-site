@@ -75,7 +75,7 @@ input[type="submit"]:hover {
     width: 100%;
     max-width: 600px;
     padding: 20px;
-    background: #fff;
+    background: #f3f3f3;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
@@ -311,4 +311,21 @@ footer {
     height: 5px;
     width: 100%;
     margin-top: 20px;
+}
+/* Submit button styling */
+#landing-form button {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+    background-color: #675bc6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+#landing-form button:hover {
+    background-color: #5a4da8; /* Darker shade of purple for hover effect */
 }

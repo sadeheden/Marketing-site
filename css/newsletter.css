@@ -106,12 +106,9 @@ main {
 }
 
 .editor-section {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
-.editor-panel h3 {
-    margin-top: 0;
-}
 
 .editor-panel label {
     display: block;
@@ -122,8 +119,8 @@ main {
 .editor-panel input[type="text"],
 .editor-panel input[type="file"],
 .editor-panel textarea {
-    width: 100%;
-    margin-bottom: 10px;
+    width: 90%;
+    margin-bottom: 5px;
 }
 
 .editor-panel textarea {
@@ -131,14 +128,14 @@ main {
 }
 
 .editor-panel .save-btn {
-    background-color: #6A5ACD;
-    color: #fff;
-    border: none;
+    margin-top: 15px;
     padding: 10px;
-    border-radius: 25px;
-    font-weight: bold;
+    width: 100%;
+    background-color: #675bc6;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .editor-panel .save-btn:hover {

@@ -19,7 +19,7 @@ header {
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+.editor label {font-weight: bold; margin-top: 10px;}
 .logo {
     font-size: 1.5em;
     color: #6A5ACD; /* Purple color */
@@ -46,7 +46,6 @@ nav a {
 nav a:hover {
     color: #6A5ACD;
 }
-
 /* Adjust header-right to work better with wrapping */
 .header-right {
     display: flex;
@@ -124,7 +123,7 @@ button {
     margin-top: 15px;
     padding: 10px;
     width: 100%;
-    background-color: #007bff;
+    background-color: #675bc6;
     color: white;
     border: none;
     border-radius: 5px;
