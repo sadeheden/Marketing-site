@@ -7,6 +7,20 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+/* Profile styling */
+.profile {
+    background-color: #e7e1ee;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    font-size: 1.2em;
+}
 
 header {
     display: flex;
@@ -235,7 +249,7 @@ footer {
 
 #email-signup-form button {
     padding: 15px 30px;
-    background-color: #ff5a5f; /* Bright, attention-grabbing color */
+    background-color: #cc9dd8; /* Bright, attention-grabbing color */
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -245,7 +259,7 @@ footer {
 }
 
 #email-signup-form button:hover {
-    background-color: #e14b4e; /* Slightly darker on hover */
+    background-color: #d8bce0; /* Slightly darker on hover */
 }
 .button{background-color: #5B4B8A;}
 /* Styles for the Back and Save buttons in the preview section */
