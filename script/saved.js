@@ -32,14 +32,22 @@ document.addEventListener("DOMContentLoaded", () => {
         let content = `<p>Saved on: ${data.savedAt}</p>`;
 
         if (data.image) {
-            content += `<img src="${data.image}" alt="Banner Image" style="max-width:100%; height:auto;">`;
+            content += `<img src="${data.image}" alt="Image" style="max-width:100%; height:auto;">`;
         }
 
-        content += `<p>Text: ${data.text}</p>`;
-        content += `<p>Size: ${getSizeDisplayName(data.size)}</p>`;
-        content += `<p>Text Style: ${data.textStyle}</p>`;
-        content += `<p>Text Size: ${data.textSize}</p>`;
-        content += `<p style="background-color:${data.color}; padding: 10px; color: white;">Color: ${data.color}</p>`;
+        content += `<p>Text: ${data.text || ''}</p>`;
+        if (data.size) {
+            content += `<p>Size: ${getSizeDisplayName(data.size)}</p>`;
+        }
+        if (data.textStyle) {
+            content += `<p>Text Style: ${data.textStyle}</p>`;
+        }
+        if (data.textSize) {
+            content += `<p>Text Size: ${data.textSize}</p>`;
+        }
+        if (data.color) {
+            content += `<p style="background-color:${data.color}; padding: 10px; color: white;">Color: ${data.color}</p>`;
+        }
 
         return content;
     }
@@ -152,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Display saved landing pages
+    // Display saved landing pages
     if (landingPages.length > 0) {
         landingPages.forEach(landingPage => {
             const row = document.createElement("tr");
@@ -165,7 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 previewCell.textContent = 'No Image';
             }
-            
 
             companyNameCell.textContent = landingPage.companyName || 'No Company Name';
             titleCell.textContent = landingPage.title || 'No Title';
@@ -175,6 +183,12 @@ document.addEventListener("DOMContentLoaded", () => {
             row.appendChild(titleCell);
 
             savedLandingPagesBody.appendChild(row);
+
+            // Add click event to open the popup
+            row.addEventListener("click", () => {
+                const content = createPreviewContent(landingPage);
+                openPopup(content);
+            });
         });
     } else {
         const noDataRow = document.createElement("tr");
@@ -201,4 +215,21 @@ async function saveBannerToLocalStorage(bannerData) {
     let banners = JSON.parse(localStorage.getItem("savedBanners")) || [];
     banners.push(bannerData);
     localStorage.setItem("savedBanners", JSON.stringify(banners));
+}
+async function saveNewsletterToLocalStorage(newsletterData) {
+    if (newsletterData.bannerImage) {
+        newsletterData.bannerImage = await fileToBase64(newsletterData.bannerImage);
+    }
+    let newsletters = JSON.parse(localStorage.getItem("savedNewsletters")) || [];
+    newsletters.push(newsletterData);
+    localStorage.setItem("savedNewsletters", JSON.stringify(newsletters));
+}
+
+async function saveLandingPageToLocalStorage(landingPageData) {
+    if (landingPageData.logo) {
+        landingPageData.logo = await fileToBase64(landingPageData.logo);
+    }
+    let landingPages = JSON.parse(localStorage.getItem("savedLandingPages")) || [];
+    landingPages.push(landingPageData);
+    localStorage.setItem("savedLandingPages", JSON.stringify(landingPages));
 }
