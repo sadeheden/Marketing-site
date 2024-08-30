@@ -249,7 +249,7 @@ input {
     left: -10px;
     margin-top: -5px;
     border-width: 5px;
-    border-style: solid;
+    border-style: none;
     border-color: transparent #fff transparent transparent;
 }
 
@@ -359,4 +359,31 @@ input[type="submit"]:hover {
 
 .popup-button:hover {
     background-color: #5B4B8A;
+}
+/* Dimmed background effect */
+body.dimmed::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Grey background */
+    z-index: 999; /* Ensure it covers everything except the popup */
+}
+
+/* Popup box styles */
+.popup-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    z-index: 1000; /* Ensure it is above the dimmed background */
+    text-align: center;
 }
