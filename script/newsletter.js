@@ -143,3 +143,23 @@ function resizeImage(file, maxWidth, maxHeight) {
         img.src = URL.createObjectURL(file);
     });
 }
+import { showPopup, closePopup, handleFormSubmit } from './functionsMain.js';
+
+document.addEventListener("DOMContentLoaded", function() {
+    const popup = document.querySelector(".popup-container");
+    const closeBtn = popup.querySelector(".close-btn");
+    const form = popup.querySelector("form");
+
+    // Show the popup when the page loads
+    showPopup(popup);
+
+    // Close the popup when the close button is clicked
+    closeBtn.addEventListener("click", function() {
+        closePopup(popup);
+    });
+
+    // Handle form submission
+    form.addEventListener("submit", function(event) {
+        handleFormSubmit(event, popup);
+    });
+});
