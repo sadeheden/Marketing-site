@@ -345,3 +345,10 @@ button:hover {
     color: #6A5ACD;
     z-index: 2;
 }
+#preview-footer-text {
+    white-space: pre-wrap;  /* Preserves whitespace and wraps text */
+    word-wrap: break-word;  /* Breaks words if necessary */
+    overflow-wrap: break-word;  /* Ensures long words break and wrap onto the next line */
+    max-width: 100%;  /* Ensures the footer text doesn't exceed the width of its container */
+    box-sizing: border-box;  /* Includes padding and border in the element's width and height */
+}

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updatePreview() {
         previewBannerText.textContent = textInput.value;
-
+    
         if (imageUpload.files[0]) {
             const reader = new FileReader();
             reader.onload = () => {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             reader.readAsDataURL(imageUpload.files[0]);
         }
-
+    
         if (mainImageUpload.files[0]) {
             const reader = new FileReader();
             reader.onload = () => {
@@ -51,12 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             reader.readAsDataURL(mainImageUpload.files[0]);
         }
-
+    
+        // Limit footer text to 30 characters and update the textarea value
+        const footerText = footerTextInput.value;
+        if (footerText.length > 50) {
+            footerTextInput.value = footerText.substring(0, 50);
+        }
         previewFooterText.textContent = footerTextInput.value;
-
+    
         // Apply background color to preview
         previewContainer.style.backgroundColor = backgroundColorInput.value;
-
+    
         // Update additional images in the grid
         additionalImageUploads.forEach((input, index) => {
             if (input.files[0]) {
@@ -68,8 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    async function saveNewsletter() {
+        async function saveNewsletter() {
         const newsletters = JSON.parse(localStorage.getItem('savedNewsletters')) || [];
     
         const bannerImage = document.getElementById('banner-image').files[0] ? await resizeImage(document.getElementById('banner-image').files[0], 800, 600) : null;
