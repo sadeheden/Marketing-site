@@ -26,11 +26,9 @@ function saveLandingPage() {
 }
 ////fix part of the peview photos
 function generateLandingPage() {
-    // Hide the edit options and show the preview
     document.getElementById('edit-options').style.display = 'none';
     document.getElementById('preview').style.display = 'block';
 
-    // Get form data
     const layout = document.getElementById('layout-choice').value;
     const logo = document.getElementById('logo-photo').files[0];
     const companyName = document.getElementById('company-name').value;
@@ -42,8 +40,6 @@ function generateLandingPage() {
     const bgColor = document.getElementById('bg-color').value;
 
     let previewContent = `<div style="background-color: ${bgColor}; padding: 20px;">`;
-
-    // Build header content
     previewContent += `<header style="background-color: ${headerColor}; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;">`;
 
     if (logo) {
@@ -60,9 +56,9 @@ function generateLandingPage() {
     function finalizePreview() {
         previewContent += `<div class="company-name">${companyName}</div>
                            <nav>
-                               <button>Home</button>
-                               <button>About</button>
-                               <button>Contact</button>
+                               <h1>Home</h1>
+                               <h1>About</h1>
+                               <h1>Contact</h1>
                            </nav>
                            </header>`;
         
@@ -84,27 +80,25 @@ function generateLandingPage() {
     function appendPhotos() {
         let imagesLoaded = 0;
         previewContent += `<section class="photo-grid layout${layout.slice(-1)}">`;
-    
+
         for (let i = 0; i < numPhotos; i++) {
             const fileInput = document.querySelector(`#body-photo-${i + 1}`);
             if (fileInput && fileInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
-                    previewContent += `<img src="${e.target.result}" alt="Body Image ${i + 1}" style="max-width: 100%; height: auto; margin: 5px auto;">`;
+                    previewContent += `<img src="${e.target.result}" alt="Body Image ${i + 1}" style="max-width: 90%; height: auto; margin: 5px auto;">`;
                     imagesLoaded++;
-                    if (imagesLoaded == numPhotos) {
+                    if (imagesLoaded === parseInt(numPhotos, 10)) {
                         finishPreview();
                     }
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             }
         }
-    
+
         function finishPreview() {
             previewContent += `</section>`;
             previewContent += `<p class="body-text" style="clear: both;">${bodyText}</p>`;
-    
-            // Add the email sign-up section before the back and save buttons
             previewContent += `<section id="email-signup-section" style="text-align: center; margin-top: 20px;">
                                    <div class="signup-box">
                                        <h3>Stay Updated!</h3>
@@ -115,15 +109,16 @@ function generateLandingPage() {
                                        </form>
                                    </div>
                                </section>`;
-    
-            // Add the Back and Save buttons with better styling
             previewContent += `<div style="text-align: center; margin-top: 20px;">
                                    <button onclick="goBack()" class="preview-button back-button">Back</button>
                                    <button onclick="saveLandingPage()" class="preview-button save-button">Save</button>
                                </div>`;
-    
+
             document.getElementById('preview-content').innerHTML = previewContent;
         }
+
+        if (numPhotos == 0) {
+            finishPreview();
+        }
     }
-    
 }

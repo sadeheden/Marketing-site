@@ -300,6 +300,27 @@ footer {
     margin: 10px;
     transition: background-color 0.3s ease;
 }
+nav h1 {
+    display: inline-block;
+    font-size: 1em;
+    margin: 0 10px;
+    padding: 10px;
+    color: #333;
+    cursor: pointer;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+nav h1:hover {
+    color: #b6b3cd; /* Example hover color */
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 /* Updated body text styling */
 .body-text {
     padding: 20px;
