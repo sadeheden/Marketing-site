@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="icon" type="icon" href="/photos/Designer (2).png" >
     <script type="module" src="/script/index.js"></script>
+    <script type="module" src="/script/main.js"></script>
 </head>
 <body>
     <header>
@@ -27,7 +28,14 @@
             <div class="profile">👩‍🎨</div>
         </div>
     </header>
-
+    <div id="projectPopup" class="popup-box">
+        <p>Do you want to continue with your previous project or start a new one?</p>
+        <div>
+            <button id="continueButton" class="popup-button">Continue</button>
+            <button id="newButton" class="popup-button">New Project</button>
+        </div>
+    </div>
+    
     <div class="menu-container">
         <h1 >What will you design today?</h1>
         <div class="button-container">

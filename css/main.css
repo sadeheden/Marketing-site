@@ -322,3 +322,41 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #5B4B8A; /* Darker purple on hover */
 }
+/* Popup box styles */
+.popup-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    z-index: 1000;
+    text-align: center;
+}
+
+.popup-box p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.popup-button {
+    background-color: #6A5ACD;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.popup-button:hover {
+    background-color: #5B4B8A;
+}
