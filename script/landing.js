@@ -205,7 +205,8 @@ async function saveLandingPage() {
         headerColor,
         bodyText,
         bgColor,
-        bodyPhotos
+        bodyPhotos,
+        savedAt: new Date().toLocaleString() // Add the savedAt timestamp here
     };
 
     landingPages.push(landingPageData);

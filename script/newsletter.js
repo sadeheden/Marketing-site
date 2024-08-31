@@ -73,12 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-        async function saveNewsletter() {
+    async function saveNewsletter() {
         const newsletters = JSON.parse(localStorage.getItem('savedNewsletters')) || [];
     
+        // Resize the images as necessary
         const bannerImage = document.getElementById('banner-image').files[0] ? await resizeImage(document.getElementById('banner-image').files[0], 800, 600) : null;
         const mainImage = document.getElementById('main-image').files[0] ? await resizeImage(document.getElementById('main-image').files[0], 800, 600) : null;
         const additionalImages = await Promise.all(Array.from(document.querySelectorAll('[id^="additional-image-"]')).map(input => input.files[0] ? resizeImage(input.files[0], 800, 600) : null));
+    
+        // Get current date and time
+        const savedAt = new Date().toLocaleString();  // You can adjust the formatting as needed
     
         const newsletterData = {
             bannerText: document.getElementById('banner-text').value || '', 
@@ -86,13 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
             mainImage: mainImage, 
             footerText: document.getElementById('footer-text').value || '', 
             backgroundColor: document.getElementById('background-color').value || '#ffffff', 
-            additionalImages: additionalImages
+            additionalImages: additionalImages,
+            savedAt: savedAt,  // Add the saved time property
+            color: document.getElementById('background-color').value || '#ffffff',  // Add the background color property
         };
     
         try {
             newsletters.push(newsletterData);
             localStorage.setItem('savedNewsletters', JSON.stringify(newsletters));
-            console.log('Newsletter saved:', newsletterData); // Debugging output
+            console.log('Newsletter saved:', newsletterData);  // Debugging output
             alert('Newsletter saved successfully!');
             window.location.href = "/save.html";  // Redirect to save.html after saving
         } catch (e) {
@@ -103,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+    
     
 
     // Event listeners for real-time preview updates

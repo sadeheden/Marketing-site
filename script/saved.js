@@ -1,15 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
-    let banners = JSON.parse(localStorage.getItem("savedBanners")) || [];
+    // References to table bodies and popup elements
     const savedBannersBody = document.getElementById("savedBannersBody");
+    const savedNewslettersBody = document.getElementById("savedNewslettersBody");
+    const savedLandingPagesBody = document.getElementById("savedLandingPagesBody");
     const popupContainer = document.getElementById("popupContainer");
     const popupContent = document.getElementById("popupPreviewContent");
     const closeButton = document.querySelector(".close-button");
 
+    // Retrieve data from localStorage
+    let banners = JSON.parse(localStorage.getItem("savedBanners")) || [];
     let newsletters = JSON.parse(localStorage.getItem("savedNewsletters")) || [];
-    const savedNewslettersBody = document.getElementById("savedNewslettersBody");
-
     let landingPages = JSON.parse(localStorage.getItem("savedLandingPages")) || [];
-    const savedLandingPagesBody = document.getElementById("savedLandingPagesBody");
 
     // Helper function to open a popup with content
     function openPopup(content) {
@@ -103,8 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
             row.appendChild(previewCell);
             row.appendChild(sizeCell);
             row.appendChild(textCell);
-            row.appendChild(styleCell);
-            row.appendChild(textSizeCell);
             row.appendChild(colorCell);
             row.appendChild(savedAtCell);
             savedBannersBody.appendChild(row);
@@ -132,8 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const previewCell = document.createElement("td");
             const bannerTextCell = document.createElement("td");
             const footerTextCell = document.createElement("td");
+            const bannerColorCell = document.createElement("td");
+            const savedAtCell = document.createElement("td");
 
-            console.log('Retrieved banner image URL:', newsletter.bannerImage); // Debugging output
 
             if (newsletter.bannerImage) {
                 previewCell.innerHTML = `<img src="${newsletter.bannerImage}" style="max-width: 100px; height: auto;">`;
@@ -160,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Display saved landing pages
-    // Display saved landing pages
     if (landingPages.length > 0) {
         landingPages.forEach(landingPage => {
             const row = document.createElement("tr");
@@ -168,6 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const previewCell = document.createElement("td");
             const companyNameCell = document.createElement("td");
             const titleCell = document.createElement("td");
+            const landingColorCell = document.createElement("td");
+            const savedAtCell = document.createElement("td");
 
             if (landingPage.logo) {
                 previewCell.innerHTML = `<img src="${landingPage.logo}" style="max-width: 100px; height: auto;">`;
@@ -217,19 +218,161 @@ async function saveBannerToLocalStorage(bannerData) {
     localStorage.setItem("savedBanners", JSON.stringify(banners));
 }
 async function saveNewsletterToLocalStorage(newsletterData) {
+    // Convert images to base64 if they exist
     if (newsletterData.bannerImage) {
         newsletterData.bannerImage = await fileToBase64(newsletterData.bannerImage);
     }
+    if (newsletterData.mainImage) {
+        newsletterData.mainImage = await fileToBase64(newsletterData.mainImage);
+    }
+    if (newsletterData.additionalImages && newsletterData.additionalImages.length > 0) {
+        newsletterData.additionalImages = await Promise.all(newsletterData.additionalImages.map(img => fileToBase64(img)));
+    }
+    // Store in localStorage
     let newsletters = JSON.parse(localStorage.getItem("savedNewsletters")) || [];
     newsletters.push(newsletterData);
     localStorage.setItem("savedNewsletters", JSON.stringify(newsletters));
 }
 
+
 async function saveLandingPageToLocalStorage(landingPageData) {
     if (landingPageData.logo) {
         landingPageData.logo = await fileToBase64(landingPageData.logo);
     }
+    landingPageData.savedAt = new Date().toLocaleString(); // Add savedAt property with current date and time
+
     let landingPages = JSON.parse(localStorage.getItem("savedLandingPages")) || [];
     landingPages.push(landingPageData);
     localStorage.setItem("savedLandingPages", JSON.stringify(landingPages));
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    // References to table bodies and popup elements
+    const savedBannersBody = document.getElementById("savedBannersBody");
+    const savedNewslettersBody = document.getElementById("savedNewslettersBody");
+    const savedLandingPagesBody = document.getElementById("savedLandingPagesBody");
+    const popupContainer = document.getElementById("popupContainer");
+    const popupContent = document.getElementById("popupPreviewContent");
+    const closeButton = document.querySelector(".close-button");
+
+    // Retrieve data from localStorage
+    let banners = JSON.parse(localStorage.getItem("savedBanners")) || [];
+    let newsletters = JSON.parse(localStorage.getItem("savedNewsletters")) || [];
+    let landingPages = JSON.parse(localStorage.getItem("savedLandingPages")) || [];
+
+    // Helper function to open a popup with content
+    function openPopup(content) {
+        popupContent.innerHTML = content;
+        popupContainer.style.display = "flex";
+    }
+
+    closeButton.addEventListener("click", () => {
+        popupContainer.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target === popupContainer) {
+            popupContainer.style.display = "none";
+        }
+    });
+
+    // Helper function to create preview content
+    function createPreviewContent(data) {
+        let content = `<p>Saved on: ${data.savedAt}</p>`;
+        if (data.image) {
+            content += `<img src="${data.image}" alt="Image" style="max-width:100%; height:auto;">`;
+        }
+        content += `<p>Text: ${data.text || 'No Text'}</p>`;
+        if (data.size) content += `<p>Size: ${getSizeDisplayName(data.size)}</p>`;
+        if (data.color) content += `<p style="background-color:${data.color}; padding: 10px; color: white;">Color: ${data.color}</p>`;
+        return content;
+    }
+
+    // Helper function to get display name for sizes
+    function getSizeDisplayName(size) {
+        switch (size) {
+            case 'small':
+                return 'Banner: Small (250x250)';
+            case 'large':
+                return 'Banner: Long (120x600)';
+            default:
+                return 'Unknown Size';
+        }
+    }
+
+    // Helper function to populate tables
+    function populateTable(dataArray, tableBody, columns) {
+        tableBody.innerHTML = ''; // Clear existing rows
+        if (dataArray.length > 0) {
+            dataArray.sort((a, b) => new Date(b.savedAt) - new Date(a.savedAt));
+            dataArray.forEach(data => {
+                const row = document.createElement("tr");
+    
+                columns.forEach(col => {
+                    const cell = document.createElement("td");
+    
+                    if (col === 'bannerImage' || col === 'logo' || col === 'image' || col === 'heroPhoto') {
+                        if (data[col]) {
+                            const img = document.createElement("img");
+                            img.src = data[col];
+                            img.style.maxWidth = "100px";
+                            img.style.height = "auto";
+                            cell.appendChild(img);
+                        } else {
+                            cell.textContent = 'No Image';
+                        }
+                    } else if (col === 'backgroundColor' || col === 'headerColor' || col === 'color') {
+                        if (data[col]) {
+                            cell.style.backgroundColor = data[col];
+                            cell.style.color = getContrastingTextColor(data[col]); // Optional: make sure text is visible
+                            cell.textContent = data[col];
+                        } else {
+                            cell.textContent = 'No Color';
+                        }
+                    } else if (col === 'savedAt') {
+                        cell.textContent = data[col] || 'Unknown'; // Access savedAt property
+                    } else {
+                        cell.textContent = data[col] || 'No Data';
+                    }
+    
+                    row.appendChild(cell);
+                });
+    
+                tableBody.appendChild(row);
+    
+                row.addEventListener("click", () => {
+                    const content = createPreviewContent(data);
+                    openPopup(content);
+                });
+            });
+        } else {
+            const noDataRow = document.createElement("tr");
+            const noDataCell = document.createElement("td");
+            noDataCell.colSpan = columns.length;
+            noDataCell.textContent = "No data saved.";
+            noDataRow.appendChild(noDataCell);
+            tableBody.appendChild(noDataRow);
+        }
+    }
+    
+    // Optional: Function to determine if text color should be light or dark based on the background color
+    function getContrastingTextColor(backgroundColor) {
+        // Convert hex color to RGB
+        const rgb = parseInt(backgroundColor.slice(1), 16);
+        const r = (rgb >> 16) & 0xff;
+        const g = (rgb >>  8) & 0xff;
+        const b = (rgb >>  0) & 0xff;
+    
+        // Calculate luminance
+        const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+    
+        // Return black for light backgrounds and white for dark backgrounds
+        return luminance > 186 ? '#000000' : '#ffffff';
+    }
+    
+    // Populate the tables with saved data
+    populateTable(banners, savedBannersBody, ['image', 'text', 'textSize', 'color', 'savedAt']);
+    populateTable(newsletters, savedNewslettersBody, ['bannerImage', 'bannerText', 'footerText', 'backgroundColor', 'savedAt']);
+    populateTable(landingPages, savedLandingPagesBody, ['logo', 'companyName', 'title', 'heroPhoto', 'headerColor', 'savedAt']);
+
+});
