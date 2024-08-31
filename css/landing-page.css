@@ -440,3 +440,18 @@ nav {
     padding: 10px;
     font-weight: bold;
 }
+@media screen and (max-width: 900px) {
+    footer {
+        display: none;
+    }
+}
+@media screen and (max-width: 900px) {
+    nav a {
+        display: none;
+    }
+    body label{font-size: 20px;}
+}
+@media screen and (max-width: 450px) {
+  #edit-options{width: 80%;max-width: 500px;text-align: center;}
+
+}

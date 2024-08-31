@@ -256,3 +256,8 @@ input[type="submit"]:hover {
     margin-top: 10px;
     display: none;
 }
+@media screen and (max-width: 700px) {
+    footer {
+        display: none;
+    }
+}

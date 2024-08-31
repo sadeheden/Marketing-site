@@ -464,3 +464,11 @@ table tbody tr {
     background-size: cover;
     background-position: center;
 }
+@media screen and (max-width: 900px) {
+    footer {
+        display: none;
+    }
+    nav a {
+        display: none;
+    }
+}

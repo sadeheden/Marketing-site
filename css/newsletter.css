@@ -350,3 +350,44 @@ button:hover {
     max-width: 100%;  /* Ensures the footer text doesn't exceed the width of its container */
     box-sizing: border-box;  /* Includes padding and border in the element's width and height */
 }
+@media screen and (max-width: 900px) {
+    footer {
+        display: none;
+    }
+    nav a {
+        display: none;
+    }
+    .popup-container {
+        display: revert;
+    }
+    .container {
+        display: flex;
+        flex-direction: column; /* Stack editor panel and preview vertically */
+        padding-left: 2%;
+    }
+    .editor-panel {
+        max-width: 100%; /* Allow the editor panel to take full width */
+    }
+    .preview {
+        width: 100%; /* Allow the preview to take full width */
+        margin-top: 20px; /* Add some spacing between editor panel and preview */
+    }
+}
+
+@media screen and (max-width: 450px) {
+    /* Hide the popup content */
+    .popup-content {
+        display: none;
+    }
+    /* Hide the entire popup container including background */
+    .popup-container {
+        display: none;
+    }
+    .container {
+        padding-left: 0; /* Remove padding for smaller screens */
+    }
+    .preview {
+        margin-top: 20px; /* Ensure spacing between the editor and preview on smaller screens */
+    }
+}
+

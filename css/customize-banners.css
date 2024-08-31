@@ -205,3 +205,19 @@ footer {
     color: #666;
 }
 
+@media screen and (max-width: 900px) {
+    footer {
+        display: none;
+    }
+    button{font-size: 20px;}
+    nav a {
+        display: none;
+    }
+}
+@media screen and (max-width: 450px) {
+  
+    .container {
+        display: grid;
+        padding-left: 2%;
+    }
+}

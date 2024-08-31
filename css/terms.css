@@ -303,3 +303,8 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #5B4B8A; /* Darker purple on hover */
 }
+@media screen and (max-width: 700px) {
+    footer {
+        display: none;
+    }
+}

@@ -387,3 +387,27 @@ body.dimmed::before {
     z-index: 1000; /* Ensure it is above the dimmed background */
     text-align: center;
 }
+@media screen and (max-width: 900px) {
+    footer {
+        display: none;
+    }
+    .popup-box{position: absolute; padding: 5%; }
+    .popup-box p{font-size: 20px;}
+    .popup-button{font-size: 20px;}
+    .menu-button{width: 200px;height: 100px;}
+}
+@media screen and (max-width: 900px) {
+    nav a {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 550px) 
+{
+    .popup-box{position: absolute; padding: 5%; }
+    .popup-box p{font-size: 11px; text-wrap: wrap;}
+    .menu-button{width: 90px;height: 70px;}
+    .popup-button{font-size: 15px;}
+    .menu-button{font-size: 15px;padding: 0;}
+    .container{display:grid ;padding-left: 2%;}
+}
