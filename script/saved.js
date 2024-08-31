@@ -28,30 +28,69 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Helper function to create preview content
-    function createPreviewContent(data) {
-        let content = `<p>Saved on: ${data.savedAt}</p>`;
+  // Helper function to create preview content
+function createPreviewContent(data) {
+    let content = `<p>Saved on: ${data.savedAt}</p>`;
 
+    // Check if it's a banner
+    if (data.image || data.color) {
         if (data.image) {
             content += `<img src="${data.image}" alt="Image" style="max-width:100%; height:auto;">`;
         }
-
-        content += `<p>Text: ${data.text || ''}</p>`;
+        if (data.text) {
+            content += `<p>Text: ${data.text}</p>`;
+        }
         if (data.size) {
             content += `<p>Size: ${getSizeDisplayName(data.size)}</p>`;
-        }
-        if (data.textStyle) {
-            content += `<p>Text Style: ${data.textStyle}</p>`;
-        }
-        if (data.textSize) {
-            content += `<p>Text Size: ${data.textSize}</p>`;
         }
         if (data.color) {
             content += `<p style="background-color:${data.color}; padding: 10px; color: white;">Color: ${data.color}</p>`;
         }
-
-        return content;
     }
+
+    // Check if it's a newsletter
+    if (data.bannerImage || data.footerText) {
+        if (data.bannerImage) {
+            content += `<img src="${data.bannerImage}" alt="Banner Image" style="max-width:100%; height:auto;">`;
+        }
+        if (data.bannerText) {
+            content += `<p>Banner Text: ${data.bannerText}</p>`;
+        }
+        if (data.footerText) {
+            content += `<p>Footer Text: ${data.footerText}</p>`;
+        }
+        if (data.backgroundColor) {
+            content += `<p style="background-color:${data.backgroundColor}; padding: 10px; color: white;">Background Color: ${data.backgroundColor}</p>`;
+        }
+    }
+
+    // Check if it's a landing page
+    if (data.logo || data.companyName) {
+        if (data.logo) {
+            content += `<img src="${data.logo}" alt="Logo" style="max-width:100%; height:auto;">`;
+        }
+        if (data.companyName) {
+            content += `<p>Company Name: ${data.companyName}</p>`;
+        }
+        if (data.title) {
+            content += `<p>Title: ${data.title}</p>`;
+        }
+        if (data.heroPhoto) {
+            content += `<img src="${data.heroPhoto}" alt="Hero Photo" style="max-width:100%; height:auto;">`;
+        }
+        if (data.headerColor) {
+            content += `<p style="background-color:${data.headerColor}; padding: 10px; color: white;">Header Color: ${data.headerColor}</p>`;
+        }
+    }
+
+    // Add a fallback for unknown data types
+    if (!content) {
+        content = '<p>No preview available for this content.</p>';
+    }
+
+    return content;
+}
+
 
     // Helper function to get display name for sizes
     function getSizeDisplayName(size) {
@@ -208,8 +247,8 @@ function fileToBase64(file) {
         reader.readAsDataURL(file);
     });
 }
-
 async function saveBannerToLocalStorage(bannerData) {
+    bannerData.savedAt = new Date().toLocaleString(); // Make sure savedAt is set
     if (bannerData.image) {
         bannerData.image = await fileToBase64(bannerData.image);
     }
@@ -217,6 +256,8 @@ async function saveBannerToLocalStorage(bannerData) {
     banners.push(bannerData);
     localStorage.setItem("savedBanners", JSON.stringify(banners));
 }
+
+
 async function saveNewsletterToLocalStorage(newsletterData) {
     // Convert images to base64 if they exist
     if (newsletterData.bannerImage) {
@@ -278,15 +319,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Helper function to create preview content
     function createPreviewContent(data) {
-        let content = `<p>Saved on: ${data.savedAt}</p>`;
-        if (data.image) {
-            content += `<img src="${data.image}" alt="Image" style="max-width:100%; height:auto;">`;
+        let content = `<span class="close-button">&times;</span>`;
+        content += `<p>Saved on: ${data.savedAt || 'Unknown'}</p>`;
+    
+        // Check if it's a banner
+        if (data.image || data.color || data.text || data.size) {
+            if (data.image) {
+                content += `<img src="${data.image}" alt="Banner Image" style="max-width:100%; height:auto;">`;
+            }
+            if (data.text) {
+                content += `<p>Text: ${data.text}</p>`;
+            }
+            if (data.size) {
+                content += `<p>Size: ${getSizeDisplayName(data.size)}</p>`;
+            }
+            if (data.color) {
+                content += `<p style="background-color:${data.color}; padding: 10px; color: white;">Color: ${data.color}</p>`;
+            }
         }
-        content += `<p>Text: ${data.text || 'No Text'}</p>`;
-        if (data.size) content += `<p>Size: ${getSizeDisplayName(data.size)}</p>`;
-        if (data.color) content += `<p style="background-color:${data.color}; padding: 10px; color: white;">Color: ${data.color}</p>`;
+    
+        // Check if it's a newsletter
+        if (data.bannerImage || data.footerText || data.backgroundColor || data.bannerText) {
+            if (data.bannerImage) {
+                content += `<img src="${data.bannerImage}" alt="Newsletter Banner Image" style="max-width:100%; height:auto;">`;
+            }
+            if (data.bannerText) {
+                content += `<p>Banner Text: ${data.bannerText}</p>`;
+            }
+            if (data.footerText) {
+                content += `<p>Footer Text: ${data.footerText}</p>`;
+            }
+            if (data.backgroundColor) {
+                content += `<p style="background-color:${data.backgroundColor}; padding: 10px; color: white;">Background Color: ${data.backgroundColor}</p>`;
+            }
+        }
+    
+        // Check if it's a landing page
+        if (data.logo || data.companyName || data.title || data.heroPhoto || data.headerColor) {
+            if (data.logo) {
+                content += `<img src="${data.logo}" alt="Landing Page Logo" style="max-width:100%; height:auto;">`;
+            }
+            if (data.companyName) {
+                content += `<p>Company Name: ${data.companyName}</p>`;
+            }
+            if (data.title) {
+                content += `<p>Title: ${data.title}</p>`;
+            }
+            if (data.heroPhoto) {
+                content += `<img src="${data.heroPhoto}" alt="Landing Page Hero Photo" style="max-width:100%; height:auto;">`;
+            }
+            if (data.headerColor) {
+                content += `<p style="background-color:${data.headerColor}; padding: 10px; color: white;">Header Color: ${data.headerColor}</p>`;
+            }
+        }
+    
+        // Add a fallback for unknown data types or missing data
+        if (content === `<p>Saved on: ${data.savedAt || 'Unknown'}</p>`) {
+            content += '<p>No preview available for this content.</p>';
+        }
+    
         return content;
     }
+    
+    
 
     // Helper function to get display name for sizes
     function getSizeDisplayName(size) {
@@ -324,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     } else if (col === 'backgroundColor' || col === 'headerColor' || col === 'color') {
                         if (data[col]) {
                             cell.style.backgroundColor = data[col];
-                            cell.style.color = getContrastingTextColor(data[col]); // Optional: make sure text is visible
+                            cell.style.color = getContrastingTextColor(data[col]);
                             cell.textContent = data[col];
                         } else {
                             cell.textContent = 'No Color';
@@ -354,6 +449,30 @@ document.addEventListener("DOMContentLoaded", () => {
             tableBody.appendChild(noDataRow);
         }
     }
+    // Helper function to open a popup with content
+function openPopup(content) {
+    popupContent.innerHTML = content;
+    popupContainer.style.display = "flex";
+
+    // Add event listener to the close button
+    const closeButton = popupContent.querySelector(".close-button");
+    if (closeButton) {
+        closeButton.addEventListener("click", () => {
+            popupContainer.style.display = "none";
+        });
+    }
+}
+
+closeButton.addEventListener("click", () => {
+    popupContainer.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+    if (event.target === popupContainer) {
+        popupContainer.style.display = "none";
+    }
+});
+
     
     // Optional: Function to determine if text color should be light or dark based on the background color
     function getContrastingTextColor(backgroundColor) {
