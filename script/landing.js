@@ -53,13 +53,15 @@ async function generateLandingPage() {
     }
 
     // Add the company name and basic navigation
-    previewContent += `<div class="company-name">${companyName}</div>
-                       <nav>
-                           <h1>Home</h1>
-                           <h1>About</h1>
-                           <h1>Contact</h1>
-                       </nav>
-                       </header>`;
+// Add the company name and basic navigation
+previewContent += `<div class="company-name" style="padding: 10px; font-weight: bold;">${companyName}</div>
+                   <nav>
+                       <h1>Home</h1>
+                       <h1>About</h1>
+                       <h1>Contact</h1>
+                   </nav>
+                   </header>`;
+
     
     // Add the title to the hero section
     previewContent += `<section class="hero">
@@ -76,7 +78,7 @@ async function generateLandingPage() {
     }
 
     // Load the body images
-    let photoGridContent = `<section class="photo-grid layout${layout.slice(-1)}">`;
+    let photoGridContent = `<section class="photo-grid layout${layout.slice(-1)}" style="display: flex; flex-wrap: wrap; justify-content: center;">`;
     let hasPhotos = false;  // Flag to check if photos are added
     for (let i = 0; i < numPhotos; i++) {
         const fileInput = document.querySelector(`#body-photo-${i + 1}`);
@@ -84,7 +86,8 @@ async function generateLandingPage() {
             try {
                 hasPhotos = true;  // Mark that at least one photo is present
                 const bodyImageSrc = await fileToBase64(fileInput.files[0]);
-                photoGridContent += `<img src="${bodyImageSrc}" alt="Body Image ${i + 1}" style="max-width: 90%; height: auto; margin: 5px auto;">`;
+                let imageStyle = layout === 'layout1' ? "width: 100%;" : "width: 45%; margin: 2.5%;";
+                photoGridContent += `<img src="${bodyImageSrc}" alt="Body Image ${i + 1}" style="${imageStyle} height: auto;">`;
             } catch (error) {
                 console.error(`Error loading body image ${i + 1}:`, error);
             }
@@ -116,12 +119,36 @@ async function generateLandingPage() {
     // Add the preview control buttons
     previewContent += `<div style="text-align: center; margin-top: 20px;">
                            <button onclick="goBack()" class="preview-button back-button">Back</button>
-                           <button onclick="saveLandingPage()" class="preview-button save-button">Save</button>
+                           <button onclick="saveLandingPage()" class="preview-button save-button">Save Landing Page</button>
                        </div>`;
     
     // Update the preview content
     document.getElementById('preview-content').innerHTML = previewContent;
 }
+
+
+    // Add the body text and signup section
+    previewContent += `<p class="body-text" style="clear: both;">${bodyText}</p>`;
+    previewContent += `<section id="email-signup-section" style="text-align: center; margin-top: 20px;">
+                           <div class="signup-box">
+                               <h3>Stay Updated!</h3>
+                               <p>Sign up with your email to receive the latest updates and exclusive offers.</p>
+                               <form id="email-signup-form">
+                                   <input type="email" id="signup-email" placeholder="Enter your email" required>
+                                   <button type="submit">Sign Up</button>
+                               </form>
+                           </div>
+                       </section>`;
+    
+    // Add the preview control buttons
+    previewContent += `<div style="text-align: center; margin-top: 20px;">
+                           <button onclick="goBack()" class="preview-button back-button">Back</button>
+                           <button onclick="saveLandingPage()" class="preview-button save-button">Save</button>
+                       </div>`;
+    
+    // Update the preview content
+    document.getElementById('preview-content').innerHTML = previewContent;
+
 
 // This is the end of generateLandingPage function
 

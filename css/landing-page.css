@@ -148,11 +148,13 @@ input[type="submit"]:hover {
 .body-text {
     padding: 20px;
     text-align: center;
+    
 }
 
 .body-text p {
-    font-size: 1.2em;
+    font-size: 1.5em;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .body-text button {
@@ -332,12 +334,12 @@ nav {
 
 
 .back-button {
-    background-color: #f0ad4e; /* Orange */
+    background-color: #8466e0; /* Orange */
     color: white;
 }
 
 .back-button:hover {
-    background-color: #ec971f;
+    background-color: #8783b6;
 }
 
 .save-button {
@@ -346,7 +348,7 @@ nav {
 }
 
 .save-button:hover {
-    background-color: #4cae4c;
+    background-color: #8eba8e;
 }
 
 /* Style for the thin colorful block */
@@ -372,4 +374,8 @@ nav {
 
 #landing-form button:hover {
     background-color: #5a4da8; /* Darker shade of purple for hover effect */
+}
+.company-name {
+    padding: 10px;
+    font-weight: bold;
 }
