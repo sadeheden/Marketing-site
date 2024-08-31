@@ -1,6 +1,5 @@
-/* General reset and body styling */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
@@ -9,34 +8,53 @@ body {
     min-height: 100vh;
 }
 
-/* Header styling */
 header {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.editor label {font-weight: bold; margin-top: 10px;}
+
 .logo {
     font-size: 1.5em;
     color: #6A5ACD; /* Purple color */
     font-weight: bold;
 }
+/* Existing CSS... */
 
-/* Navigation styling */
+/* Logo styling */
+.logo img {
+    max-width: 150px; /* Adjust this value to make the logo smaller */
+    height: auto;
+}
+
+/* Main Image styling */
+.main-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Default image styling */
+.grid-item img {
+    width: 50%;
+    height: auto;
+    border-radius: 8px;
+}
+
+
 nav {
     display: contents;
     flex: 1;
     justify-content: center;
     margin: 0 20px;
-    flex-wrap: wrap; /* Allow wrapping of navigation links */
 }
 
 nav a {
-    margin: 10px 15px; /* Add more margin to separate the links */
+    margin: 0 20px;
     text-decoration: none;
     color: #333;
     font-weight: bold;
@@ -46,14 +64,12 @@ nav a {
 nav a:hover {
     color: #6A5ACD;
 }
-/* Adjust header-right to work better with wrapping */
+
 .header-right {
     display: flex;
     align-items: center;
-    margin-top: 10px; /* Add some top margin */
 }
 
-/* Profile styling */
 .profile {
     background-color: #e7e1ee;
     color: #fff;

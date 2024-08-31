@@ -83,7 +83,6 @@ nav a:hover {
     margin-left: 20px;
     font-size: 1.2em;
 }
-
 /* Main content styling */
 main {
     display: flex;
@@ -235,7 +234,7 @@ footer {
     color: #666;
 }
 
-/* Add this to your CSS file */
+/* pop up for newsletter */
 input[type="submit"] {
     background-color: #6A5ACD; /* Purple color */
     color: #fff;
@@ -298,21 +297,20 @@ input[type="submit"]:hover {
     display: inline-block;
 }
 
-.popup-content p,
-form {
+
+.email p{
     color: #6A5ACD;
     z-index: 2;
     position: relative;
     margin-bottom: 10px;
   
-}
-
-form {
+} 
+#email {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 80%;
-}
+} 
 
 input[type="email"] {
     padding: 10px;

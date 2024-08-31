@@ -1,5 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
@@ -7,7 +7,69 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
-/* Profile styling */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.5em;
+    color: #6A5ACD; /* Purple color */
+    font-weight: bold;
+}
+/* Existing CSS... */
+
+/* Logo styling */
+.logo img {
+    max-width: 150px; /* Adjust this value to make the logo smaller */
+    height: auto;
+}
+
+/* Main Image styling */
+.main-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Default image styling */
+.grid-item img {
+    width: 50%;
+    height: auto;
+    border-radius: 8px;
+}
+
+
+nav {
+    display: contents;
+    flex: 1;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+nav a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    position: relative;
+}
+
+nav a:hover {
+    color: #6A5ACD;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
 .profile {
     background-color: #e7e1ee;
     color: #fff;
@@ -21,17 +83,16 @@ body {
     margin-left: 20px;
     font-size: 1.2em;
 }
-
-header {
+/* header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+} */
 
-.logo {
+/* .logo {
     font-size: 1.5em;
     color: #6A5ACD;
     font-weight: bold;
@@ -58,7 +119,7 @@ nav a:hover {
 .header-right {
     display: flex;
     align-items: center;
-}
+} */
 
 input[type="submit"] {
     background-color: #6A5ACD;
@@ -318,7 +379,7 @@ nav h1:hover {
 }
 
 nav {
-    display: flex;
+ 
     justify-content: space-around;
     align-items: center;
 }
