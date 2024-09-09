@@ -1,3 +1,5 @@
+  //FILE OF CLASS USER CREATES OBJECT IN THE TYPE USER NEED TO HAVE ALL
+  // THE CONSTRUCTOR INFO TO SAVE THE OBJECT
 export class User {
     email;
     password;
@@ -9,5 +11,5 @@ export class User {
         this.username = username;
     }
 
-  
+
 }
