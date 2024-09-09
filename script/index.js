@@ -1,5 +1,5 @@
 import { login, showUserName, createNewUser, logout } from './functions.js';
-
+//the adress where they get the option to do the change=>
 // Login form listener on index or root page
 if (location.href.includes('index') || location.pathname === '/') {
     document.querySelector('#login').addEventListener('submit', login);
@@ -23,7 +23,7 @@ if (location.href.includes('profile')) {
     showUserName();
 }
 
-// Handle popup visibility and positioning
+// Handle popup visibility and positioning before the log in
 document.addEventListener('DOMContentLoaded', function() {
     const createButton = document.querySelector('.create-button');
     const popupBox = document.getElementById('popupBox');
@@ -50,7 +50,7 @@ import { global } from "./vars.js";
 document.addEventListener('DOMContentLoaded', () => {
     const userTableBody = document.querySelector('#user-table tbody');
 
-    // Iterate over the global.users array and create table rows
+    // Iterate over the global.users array and create table rows for the user page just for the admin
     global.users.forEach(user => {
         const row = document.createElement('tr');
         row.innerHTML = `

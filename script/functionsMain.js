@@ -1,3 +1,4 @@
+//this code is only the popup that is on the newsletter
 export function showPopup(popup) {
     const screenWidth = window.innerWidth;
 

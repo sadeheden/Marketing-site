@@ -1,6 +1,6 @@
 import { global } from "./vars.js";
 import { User } from "../model/user.model.js";
-
+//all the code of sign in log on user check that we use in all the pages
 export function login(event) {
     event.preventDefault();
     const email = document.querySelector("#email").value.trim();
