@@ -4,7 +4,7 @@ function generatePhotoInputs() {
 
     // Clear previous photo inputs
     photoUploadsDiv.innerHTML = '';
-
+//add photos for the number selected
     for (let i = 0; i < numPhotos; i++) {
         const photoInput = document.createElement('input');
         photoInput.type = 'file';
@@ -14,13 +14,13 @@ function generatePhotoInputs() {
         photoUploadsDiv.appendChild(document.createElement('br'));
     }
 }
-
+// Function to go back to editing from preview
 function goBack() {
     // Show the edit options and hide the preview
     document.getElementById('edit-options').style.display = 'block';
     document.getElementById('preview').style.display = 'none';
 }
-
+// Function to generate landing page preview
 async function generateLandingPage() {
     document.getElementById('edit-options').style.display = 'none';
     document.getElementById('preview').style.display = 'block';
@@ -52,7 +52,6 @@ async function generateLandingPage() {
         previewContent += `<div class="logo">No Logo</div>`;
     }
 
-    // Add the company name and basic navigation
 // Add the company name and basic navigation
 previewContent += `<div class="company-name" style="padding: 10px; font-weight: bold;">${companyName}</div>
                    <nav>
@@ -104,7 +103,7 @@ previewContent += `<div class="company-name" style="padding: 10px; font-weight: 
     }
 
     // Add the body text and signup section
-    previewContent += `<p class="body-text" style="clear: both;">${bodyText}</p>`;
+    previewContent += `<p class="body-text" style="clear: both;"> ${bodyText} </p>`;
     previewContent += `<section id="email-signup-section" style="text-align: center; margin-top: 20px;">
                            <div class="signup-box">
                                <h3>Stay Updated!</h3>
@@ -139,6 +138,7 @@ previewContent += `<div class="company-name" style="padding: 10px; font-weight: 
                                </form>
                            </div>
                        </section>`;
+
     
     // Add the preview control buttons
     previewContent += `<div style="text-align: center; margin-top: 20px;">
