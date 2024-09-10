@@ -1,5 +1,4 @@
-//this file is athe first part of the popup that appers in the newsletter 
-//the secod part is functionMain
+//pop up for main
 document.addEventListener("DOMContentLoaded", function() {
     // Select the popup element using querySelector by its ID
     const popup = document.querySelector("#projectPopup");
